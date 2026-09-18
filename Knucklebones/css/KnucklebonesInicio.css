@@ -1,0 +1,220 @@
+*{
+  cursor: url(../Assets/img/cursor.png), auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+html {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;    
+  background-image: url(../Assets/img/FondoInicio.gif);
+	background-repeat: no-repeat;
+	background-size: cover;
+  color: #a9a494;
+  background-color: black;
+
+}
+/*NoScript*/
+noscript{
+  color: blue;
+  outline: auto;
+  outline-color: rebeccapurple;
+}
+/*Boton Música*/
+#BotonMusica{
+  background-image: url(../Assets/img/MusicNo.png);
+  background-repeat: no-repeat;
+	background-size: cover;
+  background-position: center; 
+  background-color: transparent;
+  border-color: #2C2C2C;  
+
+  width: 6vw;
+  height: 10vh;
+
+  position: fixed; 
+  bottom: 5vh;
+  right: 1vh; 
+  z-index: 2; 
+}
+#BotonMusica:hover{
+  transform:scale(1.03);
+}
+
+body{
+	text-align:center;
+  font-family: "Piazzolla", serif;
+  font-size: 1em;
+}
+
+header{
+  color: #f2e9cd;
+  font-size: 3em;
+  flex-direction:row;
+  margin-top: -6%;
+  margin-bottom: -10%;
+}
+#Title_Bracket{
+  padding: 1vw;
+}
+.TituloPrincipal{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+
+/*Footer + logos*/
+footer{
+  background-color: rgb(18, 16, 16);
+  color: #5a5241;
+  font-size: 2em;
+  margin-top: 5%;
+  padding-top: 0.5%;
+  margin-bottom: auto; /* Empuja el footer hacia abajo */
+}
+.specialThanks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.specialThanks img {
+  height: 40vh; 
+  width: auto; /* Mantiene la proporción */
+  object-fit: contain; /* Asegura que la imagen no se deforme */
+}
+#MassiveMonster {
+  transform: scale(1);
+  z-index: -1;
+}
+#MassiveMonster:hover {
+  opacity: 0;
+}
+#MassiveMonsterBlue{
+  z-index: 1;
+  
+  /*display: none; //  display: contents;*/
+}
+#MassiveMonsterBlue:hover{
+   z-index: 1;
+}
+#DevolverDigital {
+  transform: scale(1);
+}
+#CultiVis {
+  transform: scale(0.5);
+}
+/*Listas*/
+ul{
+  list-style:none; /*Quitando los puntos de la lista*/
+}
+ol {
+  list-style-position: inside; 
+  margin-top: 2.5vh;
+  text-decoration-style:bold;
+}
+
+/*NAV*/
+nav{
+  margin-bottom: 5%;
+  font-size: 1em;
+}
+#imagenCambiante{
+  margin-bottom: -6%;
+}
+#subTexto{
+  color: #a9a494;
+  font-size: 2.5em;;
+  margin-bottom: -6%;
+}
+  /*Texto Scroll*/
+/*.scroll-left-container {
+  overflow: hidden; 
+  position: relative;
+}
+.scroll-left {
+  width: 5vw;
+  height: 5vh;
+  animation: scroll-left 5s linear infinite;
+}
+.scroll-left p {
+  margin: 0;
+  color: #a9a494;
+  font-size: 2.5em;
+}*/
+/*Definir Animación
+@keyframes scroll-left {
+  0%{
+    transform: translateX(50%); 		
+  }
+  100%{
+    transform: translateX(-50%); 
+  }
+}*/
+
+/*Botones*/
+button{
+  font-family: "Piazzolla", serif;
+  font-size: 3em;
+  text-decoration: none;
+  width: 29vw;
+  height: 20vh;
+  margin-bottom: -2.5%;
+}
+.botonDecorado{
+  background-image: url("../Assets/img/Header_BG_Black.png");
+  background-color: transparent;
+  background-size:contain;      
+  border:none;  
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: #a9a494;
+  font-weight: bold;
+}
+.botonDecorado:hover{
+  color: yellow;
+	background-image: url("../Assets/img/Header_BG_Red.png");
+}
+/*Tutorial*/
+#tutorial{
+  display: none;
+}
+.css_Tutorial{
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#CajaTutorial{
+  background-image: url("../Assets/img/TutotialImagen.png");
+  background-repeat: no-repeat;
+	background-size:contain;
+  background-position: center; 
+  background-color: transparent;
+
+  display: block;
+  height: auto;
+  width: auto;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+
+}
+#cajaTituloTutorial{
+  display: flex;          /* Asegúrate de que el contenedor padre use flex */
+  flex-direction: row;    /* Esto ya está bien */
+  align-items: center;    /* Centra verticalmente los elementos */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  gap: 10px;             /* Espacio entre los elementos (opcional) */
+}
+#tituloTextoTutorial{
+  color: #f2e9cd;
+  font-size: 2em;
+  margin-bottom: -2.8vh;
+}
+#textoTutorial{
+  font-size: 1.4em;
+  line-height: 1.4;
+}

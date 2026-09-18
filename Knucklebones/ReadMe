@@ -1,0 +1,112 @@
+Trabajo realizado por Adriana Remiro Autric.
+
+«Uso de IA»: 
+Qué partes hiciste con IA y con qué herramienta, 1-2 prompts reales relevantes, 
+cómo verificaste lo generado y qué escribiste a mano. Si no usaste IA, dilo y listo.
+
+Control de errores o dudas.
+//1.
+Para casos donde no encontraba que podía estar mal, por ejemplo en la creación del fondo
+de inicio quería poner un gif. Pero poniendo:
+body{
+	background-image: url(..\Knucklebones\Assets\img\FondoInicio.gif); 
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align:center;
+}
+No estaba funcionando y tras ver que efectivamente era así cómo se hacía no lograba
+comprender que es lo que podía tener mal, la url eta correcta, el css estaba bien conectado al html 
+y no se me ocurría que más podría ser lo que estuviera mal.
+
+Resulta y acontece que no estaban funcionando los links directos ni relativos que te da el propio
+visaulStudio cuando haces click derecho sobre la imagen. Por lo que al preguntarle a ecosiaAI. 
+
+Me dio de solución poner "background-image: url(../Assets/img/FondoInicio.gif);"
+Y me dijo a que se debía a que: 
+"Visual Studio te da rutas relativas al sistema de archivos,
+pero el navegador las interpreta desde la URL del servidor local, por eso fallan."
+//2.
+Había un momento en el que estaba probando el nonscript, pero el texto me salía aún teniendo el
+javaScript activado, tras intentar investigar por foros no encontré nada y le pregunte a ecosia AI.
+Por tanto le pasé esa pequeña porción de código y expliqué que sucedía
+<nonscript>
+        <p>Parece que ha habido algún error no se ha posid cargar javaScript, comprueba si lo tienes desactivado</p>
+</nonscript>
+Lo que había sucedido era que había escrito "nonscript" en vez de noscript.
+
+//Se que se han pedido entre 1 y 2, pero quiero poner más no solo porque me sienta mal usar la IA
+Si no porqué así tengo referencia de errores o dudas que he llegado a tener y así puedo revisitarlas
+//3.
+Quería hacer que mi página web se puediera cerrar sola una vez le das a salir, 
+tras buscar un rato encontré que existía una funión llamada "window.close()", 
+pero cuando lo prové no lograba hacer anda. Intenté buscar información pero principalmente 
+salían cosas de cómo cerrarla si no funcionaba el botón de X (salida) y eso no era lo que buscaba.
+Por lo que al final le pregunté a ecosia AI.
+Y lo que pasaba es que "window.close()", funcionaba si la ventana no fue habierta con 
+javaScript entre otras medidas más específcas. Y me dio de solución algunos ejemplos pero al final
+decidi usar el que más me gustó:
+function salir() {
+    if (window.opener) {
+        window.close();
+    } else {
+        alert("Esta ventana no puede cerrarse automáticamente. Serás redirigido.");
+        window.location.href = "https://ejemplo.com";
+    }
+}
+///////////////////
+«Autopsia»:
+Las 2 decisiones más discutibles de tu código y qué alternativa descartaste en cada una.
+//1.
+Quería hacer que en alguna perte de la página hubiera un texto que se moviera, entonces
+investigando encontré que existía "Marquee", que era justo lo que quería, pero era un lenguaje
+obsoleto pero que aún funcionaba auqnue podían quitarlo en cualquier momento.
+Seguí investigando y decubrí que se podía hacer por css. Pero era bastante más tedioso.
+Estuve dándole unas vueltas y finalmente me decidí por la segunda para aprender cómo hacerlo 
+y así no tener que descubrir un día que ya no funcionaba.
+Lamentablemente para mi no acabé logrando que funcionara como yo quería, debido a que el texto
+se quedaba pillado, así que decidí usar keyframes cómo si se tratase de una imagen.
+Que era algo más sencillo (a mi parecer)
+//2.
+Estaba pensando originalmente que el "Cómo jugar" fuera un pop up que fuera un float por encima de lo demás
+Pero al final deci que era más dencillo hacer un pop up normal que apareciera por abajo y ya.
+
+
+
+///////////////////
+Extra:
+Páginas web de donde he sacado información:
+
+Páginas web de donde he sacado imágenes/Assets:
+    Inforación:
+    Uso de apuntes de primero de la carrera
+https://developer.mozilla.org/es/docs/Learn_web_development
+https://es.stackoverflow.com/
+https://www.freecodecamp.org/espanol/news/codigo-de-enlace-html-como-insertar-un-enlace-a-un-sitio-web-con-href/
+https://aracnibot.blogspot.com/2014/12/partes-del-body-html5.html
+https://www.piensasolutions.com/blog/como-hacer-una-pagina-web-en-html-guia-paso-a-paso-para-principiantes#tree-5
+https://www.youtube.com/watch?v=1qBl19BmdB8
+https://www.espai.es/blog/2025/09/como-hacer-un-modo-oscuro-solo-con-html-y-css/
+https://www.youtube.com/watch?v=YRrp-h0ZF30
+https://www.freecodecamp.org/espanol/news/como-cambiar-la-tipografia-en-html/
+https://www.youtube.com/watch?v=xq_pfICK37g
+http://html.conclase.net/w3c/html401-es/present/graphics.html
+https://www.boardinfinity.com/blog/mastering-html-and-css-from-fundamentals-to-advanced-techniques/
+https://www.reddit.com/r/webdev/comments/j91v3q/how_do_i_remove_bullet_points_from_ul_and_li/?tl=es-es
+https://www.silocreativo.com/neumorfismo-disenando-botones-con-css/
+https://lorca.act.uji.es/asignatura/e08/ayudas/tutorial_html/ew_113.htm  
+https://www.freecodecamp.org/espanol/news/como-usar-html-para-abrir-un-link-en-un-tab-nuevo/
+https://www.youtube.com/watch?v=WD039DKsdyI
+https://es.stackoverflow.com/questions/592227/c%C3%B3mo-cambiar-el-cursor-en-javascript-para-que-tome-la-forma-de-una-imagen  
+https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay
+https://www.w3schools.com/jsref/prop_style_backgroundimage.asp
+https://www.w3schools.com/js/js_api_pointer_events.asp
+https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+https://www.w3schools.com/html/html_lists_ordered.asp
+https://www.youtube.com/watch?v=fI-VZwIFtwI
+Assets:
+https://www.dafont.com/es/triforce.font?text=cult+of+the+lamb
+https://www.youtube.com/watch?v=y4PfvZiEs5E
+https://shared.akamai.steamstatic.com/community_assets/images/items/1313140/c80d1a3ea315f69f72cbb77bffe42c5ed0f7b945.mp4
+https://cultivis.netlify.app/
+https://cult-of-the-lamb.fandom.com/wiki/Category:Images
+https://www.gameuidatabase.com/gameData.php?id=1549

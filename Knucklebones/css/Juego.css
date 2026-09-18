@@ -1,0 +1,127 @@
+*{
+    cursor: url(../Assets/img/cursor.png), auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+html {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;    
+    background-image: url(../Assets/img/JuegoBG.png);
+    background-repeat: no-repeat;
+	background-size: cover;
+    background-position: center;
+    color: #a9a494;
+    background-color: black;
+    justify-content: center;
+    text-align: center;
+}
+
+/*Música*/
+#BotonMusica{
+    background-image: url(../Assets/img/MusicNo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    background-color: transparent;
+    border-color: #2C2C2C;  
+
+    width: 6vw;
+    height: 10vh;
+
+    position: fixed; 
+    bottom: 5vh;
+    right: 1vh; 
+    z-index: 2; 
+}
+#BotonMusica:hover{
+  transform:scale(1.03);
+}
+
+/*Seleccionador de filas y columnas*/
+#filasYcolumnas{
+    display: flex;
+    flex-direction: row;
+    gap: 3vw;
+
+    color: #f2e9cd;
+    font-size: 1,02em;
+}
+#generar{
+    margin-top: 2vh;
+}
+/*Boton*/
+button{
+  font-family: "Piazzolla", serif;
+  font-size: 1.05em;
+  text-decoration: none;
+  width: 10vw;
+  height: 5vh;
+  margin-bottom: -2.5%;
+}
+#botonDecorado{
+    background-image: url("../Assets/img/Header_BG_Black.png");
+    background-color: transparent;
+    background-size:contain;      
+    border:none;  
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #a9a494;
+    font-weight: bold;
+}
+#botonDecorado:hover{
+    color: yellow;
+    background-image: url("../Assets/img/Header_BG_Red.png");
+}
+
+/*Tableros*/
+#ContenedorTableros{
+    display: grid;
+    grid-template-columns: auto auto;
+
+    background-color: red;
+}
+#JugadorA{
+    display: grid;
+    grid-template-columns: auto auto;
+
+    margin: 1vh 1vw;
+
+    background-color: blue;
+}
+#JugadorB{
+    display: grid;
+    grid-template-columns: auto auto;
+
+    background-color: blue;
+}
+.Dado{
+    background-color: green;
+
+    width: 5vw;
+    height: 10vh;
+    margin: 3vh 3vw;
+
+    align-items: center;
+    justify-content: center;
+}
+.Tablero{
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    background-color: purple;
+
+    width: 20vw;
+    height: 20vh ;
+    margin: 3vh 3vw;
+
+    align-items: center;
+    justify-content: center;
+}
+.ColumnasT{
+    margin: 1vh 1vw;
+}
+.FilasT{
+    margin: 1vh 1vw;
+}

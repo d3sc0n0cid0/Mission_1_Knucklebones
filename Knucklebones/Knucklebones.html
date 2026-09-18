@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Union con el javaScript-->
+    <!--defer: Para que se descargue en segundo plano el js y se ejecute tras se cargue el html-->
+    <script defer src="..\Knucklebones\js\Knucklebones.js"></script>
+    <!--Union con el css--> 
+    <link href="..\Knucklebones\css\KnucklebonesInicio.css" rel="stylesheet" type="text/css">
+
+    <!--Vínculo de las fuentes de GoogleFonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,100..900;1,8..30,100..900&display=swap" rel="stylesheet">
+
+
+    <link rel="shortcut icon" href="..\Knucklebones\Assets\img\Site-favicon.png" >
+    <title>Knucklebones</title>
+</head>
+<body>
+    <!--No se acepta el uso del JavaScript por cualquier razón-->
+    <noscript>
+        <p>Este mensaje solo se muestra si JavaScript está desactivado</p>
+    </noscript>
+    <!--Música-->
+    <button id="BotonMusica" onclick="controlBGMusica()"></button>
+    <!--Separación-->
+    <header>
+        <div class="TituloPrincipal">
+            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+            <h1>KNUCLEBONES</h1>
+            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+        </div>
+    </header>
+    <!--Separación-->
+    <nav>
+        <img id="imagenCambiante" src="Assets/img/oro.png" alt="Oro/Muerte"/>
+        <div class="scroll-left-container">
+            <div class="scroll-left">
+                <p id="subTexto">Un juego de riesgo y ganancias</p>
+            </div>
+        </div>
+    </nav>
+    <!--Separación-->
+    <section>
+         <ul>
+            <li>
+                <button class="botonDecorado botonSound1" onclick="jugar()">Jugar</button>
+            </li>
+            
+            <li><button class="botonDecorado clickBoton" onclick="js_tutorial('tutorial') ">Cómo Jugar</button></li>
+                <div id="tutorial" class="css_Tutorial">
+                    <div id="CajaTutorial">
+                        <div id="cajaTituloTutorial">
+                            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p id="tituloTextoTutorial">OBJETIVO</p>
+                            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                        </div>
+                        <p id="textoTutorial">Consigue más puntos que tu oponente colocando dados en tres columnas.</p>
+                        <p id="tituloTextoTutorial">PREPARACIÓN</p>
+                        <p id="textoTutorial">Cada jugador tiene nueve dados de seis caras. Hay un tablero compartido con 3 columnas.</p>
+                        <p id="tituloTextoTutorial">GAMEPLAY</p>
+                        <ol type="1" id="textoTutorial">
+                            <li>Los jugadores se turnan para lanzar un dado.</li>
+                            <li>Coloca el dado lanzado en cualquiera de tus tres columnas.</li>
+                            <li>Cada columna puede contener un máximo de tres dados.</li>
+                        </ol>
+                        <p id="tituloTextoTutorial">REGLAS</p>
+                        <p id="textoTutorial"><b>Retirar los dados del oponente:</b> Cuando colocas un dado, retiras todos los <br>
+                            dados de tu oponente del mismo valor en la misma columna. </p>
+                        <p id="textoTutorial"><b>Multiplicadores de puntuación:</b> Los dados del mismo valor dentro de una sola <br>
+                            columna multiplican su puntuación.<br>
+                                 Dos dados iguales: Cada dado vale el doble de su valor nominal <br> (por ejemplo, dos 5 valen 20 puntos en total).<br>
+                                 Tres dados iguales: Cada dado vale el triple de su valor nominal <br> (por ejemplo, tres 5 valen 45 puntos en total).</p>
+                        <p id="textoTutorial">El juego termina inmediatamente cuando un jugador llena sus nueve espacios. <br> El otro jugador no tiene un turno final.</p>
+                        <p id="textoTutorial">Los jugadores suman el valor de todos sus dados, aplicando cualquier multiplicador. <br> El jugador con la puntuación total más alta gana</p>
+                    </div>
+                </div>
+            <li><button  class="botonDecorado" onclick="salir()">Salir</button></li>
+        </ul>
+    </section>
+    <!--Separación-->
+    <footer>
+        <p>Trabajo realizado por &copyAdriana Remiro Autric 2026</p>
+        <p>Gracias especiales a:</p>
+        <div class="specialThanks">
+            <a href="https://massivemonster.com/" target="_blank" rel="noopener noreferrer"> <!--_blank: Lo abre en una nueva pestaña//nooponer noreferrer:  prevenir el tipo de phishing conocido como tabnabbing.(Tabnabbing, algunas veces llamado reverse tabnabbing, es un exploit que usa el comportamiento por defecto del navegador con target="_blank" para ganar acceso parcial a tu página a través window.object API.)-->
+                <img id="MassiveMonster" src="Assets/img/Company-Logo_Massive-Monster.png" alt="MassiveMonsterLogo" />
+                <img id="MassiveMonsterBlue" src="Assets/img/Company-Logo_Massive-Monster_hover.png" alt="MassiveMonsterLogo" />
+            </a>
+            <a href="https://www.devolverdigital.com/" target="_blank" rel="noopener noreferrer">
+                <img id="DevolverDigital" src="Assets/img/Devolver_Digital-Logo.wine.png" alt="DevolverDigitalLogo"/>
+            </a>
+            <a href="https://cultivis.netlify.app/" target="_blank" rel="noopener noreferrer">
+                <img id="CultiVis" src="Assets/img/favicon.png" alt="CultiVisLogo"/>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!--Union con el javaScript-->
+    <!--defer: Para que se descargue en segundo plano el js y se ejecute tras se cargue el html-->
+    <script defer src="..\Knucklebones\js\Juego.js"></script>
+    <!--Union con el css--> 
+    <link href="..\Knucklebones\css\Juego.css" rel="stylesheet" type="text/css">
+
+    <!--Vínculo de las fuentes de GoogleFonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,100..900;1,8..30,100..900&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="..\Knucklebones\Assets\img\Site-favicon.png" >
+    <title>Knucklebones</title>
+</head>
+<body>
+    <!--No se acepta el uso del JavaScript por cualquier razón-->
+    <noscript>
+        <p>Este mensaje solo se muestra si JavaScript está desactivado</p>
+    </noscript>
+    <!--Música-->
+    <button id="BotonMusica" onclick="controlBGMusica()"></button>
+
+    <section>
+        <!--Contenedor de los tableros-->
+        <div id="ContenedorTableros">
+            <!--Jugador A-->
+            <div id="JugadorA">
+                <div id="DadoA" class="Dado">
+                    <p>Dado</p>
+                </div>
+                <div id="TableroA" class="Tablero">
+                    <div class="ColumnasT">
+                        <div class="FilasT">
+                            <p>A</p>
+                        </div>
+                        <div class="FilasT">
+                            <p>A</p>
+                        </div>
+                        <div class="FilasT">
+                            <p>A</p>
+                        </div>
+                    </div>
+                    <div class="ColumnasT">
+                        <div  class="FilasT">
+                            <p>B</p>
+                        </div>
+                        <div class="FilasT">
+                            <p>B</p>
+                        </div>
+                        <div class="FilasT">
+                            <p>B</p>
+                        </div>
+                    </div>
+                    <div class="ColumnasT">
+                        <div class="FilasT">
+                            <p>C</p>
+                        </div>
+                        <div class="FilasT">
+                            <p>C</p>
+                        </div>
+                        <div class="FilasT">
+                            <p>C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--TableroB-->
+            
+        </div>
+    </section>
+    
+
+
+    
+</body>
+</html>
