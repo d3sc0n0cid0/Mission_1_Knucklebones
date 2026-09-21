@@ -26,53 +26,69 @@
     <!--Música-->
     <button id="BotonMusica" onclick="controlBGMusica()"></button>
 
+    <div id="selectorGanador">
+        <p>Texto que muestra que jugador ha ganado</p>
+        <button onclick="reiniciarPartida()">Volver a jugar</button>
+    </div>
+
     <section>
-        <!--Contenedor de los tableros-->
-        <div id="ContenedorTableros">
-            <!--Jugador A-->
-            <div id="JugadorA">
-                <div id="DadoA" class="Dado">
-                    <p>Dado</p>
-                </div>
-                <div id="TableroA" class="Tablero">
-                    <div class="ColumnasT">
-                        <div class="FilasT">
-                            <p>A</p>
+        <div id="ContenedorGeneral">
+            <!--Contenedor Tablero A-->
+            <p id="selectorTurno">Turno de jugador A</p>
+            <div id="ContenedorTableros">
+                <!--Personaje-->
+                <img id="PersonajeA" src="Assets/img/cabra_idle.gif" alt="favicon">
+                <!--Jugador A-->
+                <div id="JugadorA"  class="jugador">
+                    <p id="puntuacionA">Puntuación: 0</p>
+                    <div id="TableroA" class="Tablero">
+                        <div data-columna="0" class="ColumnasT">
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
                         </div>
-                        <div class="FilasT">
-                            <p>A</p>
+                        <div data-columna="1" class="ColumnasT">
+                            <div  class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
                         </div>
-                        <div class="FilasT">
-                            <p>A</p>
-                        </div>
-                    </div>
-                    <div class="ColumnasT">
-                        <div  class="FilasT">
-                            <p>B</p>
-                        </div>
-                        <div class="FilasT">
-                            <p>B</p>
-                        </div>
-                        <div class="FilasT">
-                            <p>B</p>
-                        </div>
-                    </div>
-                    <div class="ColumnasT">
-                        <div class="FilasT">
-                            <p>C</p>
-                        </div>
-                        <div class="FilasT">
-                            <p>C</p>
-                        </div>
-                        <div class="FilasT">
-                            <p>C</p>
+                        <div data-columna="2" class="ColumnasT">
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--TableroB-->
-            
-        </div>
+            <!--Dado-->
+            <div id="Dado"><p>Dado</p></div>
+            <!--Contenedor Tablero A-->
+            <div id="ContenedorTableros">
+                <!--TableroB-->
+                <div id="JugadorB" class="jugador">
+                    <div id="TableroB" class="Tablero">
+                        <div data-columna="0" class="ColumnasT">
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                        </div>
+                        <div data-columna="1" class="ColumnasT">
+                            <div  class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                        </div>
+                        <div data-columna="2" class="ColumnasT">
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                        </div>
+                    </div>
+                    <p id="puntuacionB">Puntuación: 0</p>
+                </div>
+                <!--Personaje-->
+                <img id="PersonajeA" src="Assets/img/cabra_idle.gif" alt="favicon">
+            </div>
+        <div>
     </section>
     
 

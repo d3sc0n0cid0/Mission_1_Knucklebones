@@ -76,27 +76,25 @@ button{
 }
 
 /*Tableros*/
+#ContenedorGeneral{
+    display: grid;
+    grid-template-columns: auto;
+    place-items: center; 
+}
 #ContenedorTableros{
     display: grid;
     grid-template-columns: auto auto;
-
-    background-color: red;
+    place-items: center; 
 }
-#JugadorA{
+.jugador{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
 
     margin: 1vh 1vw;
 
     background-color: blue;
 }
-#JugadorB{
-    display: grid;
-    grid-template-columns: auto auto;
-
-    background-color: blue;
-}
-.Dado{
+#Dado{
     background-color: green;
 
     width: 5vw;
@@ -121,7 +119,34 @@ button{
 }
 .ColumnasT{
     margin: 1vh 1vw;
+    background-color: darkblue;
+}
+.ColumnasT:hover{
+
+    display:block;
+
+    border-width: thick;
+    background-color: green;
+    border-style: dotted;
+    border-color: aqua;
+
 }
 .FilasT{
+    display: block;
     margin: 1vh 1vw;
+    background-color: bisque;
+}
+
+/*Cosas visuales del tablero*/
+/*Selector ganador*/
+#selectorGanador {
+    background-color: chocolate;
+    z-index: 2;
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    padding: 5%;
+    text-align: center;
+    display:none;
 }

@@ -53,6 +53,24 @@ function salir() {
         window.location.href = "https://ejemplo.com";
     }
 }
+//4. Quería antes de hacer el propio juego ejecutable desde la web probarlo desde la consola, entonces
+necesitaba que el programa recibiera inputs míos no encontraba nada y le pregunté a ecosia AI.
+Y me hablo de "programa interactivo en Node.js"
+Y me dio los siguientes códigos:
+
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Función para preguntar al usuario
+function preguntar(texto) {
+  return new Promise((resolve) => {
+    readline.question(texto, (respuesta) => {
+      resolve(respuesta);
+    });
+  });
+}
 ///////////////////
 «Autopsia»:
 Las 2 decisiones más discutibles de tu código y qué alternativa descartaste en cada una.
@@ -69,7 +87,10 @@ Que era algo más sencillo (a mi parecer)
 //2.
 Estaba pensando originalmente que el "Cómo jugar" fuera un pop up que fuera un float por encima de lo demás
 Pero al final deci que era más dencillo hacer un pop up normal que apareciera por abajo y ya.
-
+//3. 
+Quería hacer que el tablero fuera seleccionable, es decir que los jugadores pudieran elegir el tamaño
+del que querían el tablero. Pero al final me pareció algo más complicado y además chocaba bastante con la 
+visión que tenía para cómo se vería de forma visual el juego.
 
 
 ///////////////////
@@ -103,6 +124,16 @@ https://www.w3schools.com/js/js_api_pointer_events.asp
 https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 https://www.w3schools.com/html/html_lists_ordered.asp
 https://www.youtube.com/watch?v=fI-VZwIFtwI
+https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
+https://developer.mozilla.org/es/docs/Web/API/Document/querySelector
+https://www.youtube.com/watch?v=JhLa1bpzNVM
+https://es.stackoverflow.com/questions/132992/array-bidimensional-javascript
+https://programacionymas.com/blog/super-console-log-javascript
+https://lenguajecss.com/css/bordes/border/
+https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/await
+https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
+https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array
+
 Assets:
 https://www.dafont.com/es/triforce.font?text=cult+of+the+lamb
 https://www.youtube.com/watch?v=y4PfvZiEs5E

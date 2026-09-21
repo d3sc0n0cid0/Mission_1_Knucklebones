@@ -1,19 +1,9 @@
 // Variables globales 
-var randTime;
-var imagen = document.getElementById("imagenCambiante");
-var imagenesPosibles = ["../Knucklebones/Assets/img/oro.png", "../Knucklebones/Assets/img/muerte.png"];
-var indice = 0;
-var intervaloCambio; // Variable para almacenar el intervalo
-
-var musicaFondo = new Audio("../Knucklebones/Assets/sfx/Cult of the Lamb [Official] - Start a Cult - River Boy (youtube).mp3");
-musicaFondo.loop = true;
-var musicOn = true;
-var fondoBotonMusica = document.getElementById("BotonMusica");
-
-var hoverBoton = document.getElementsByClassName("botonSound1");
-var tocarBoton = new Audio("../Knucklebones/Assets/sfx/pulsarBoton.mp3");
-var acariciarBoton = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
-
+let randTime;
+const imagen = document.getElementById("imagenCambiante");
+const imagenesPosibles = ["../Knucklebones/Assets/img/oro.png", "../Knucklebones/Assets/img/muerte.png"];
+let indice = 0;
+let intervaloCambio; // Variable para almacenar el intervalo
 
 // Generar número aleatorio
 function generarTiempoRandom() {
@@ -29,12 +19,30 @@ function CambioImagen() {
     indice = (indice + 1) % imagenesPosibles.length; // Alterna entre 0 y 1
     randTime = generarTiempoRandom();
 }
+//Cambiar logo cuando hover
+const logohover = document.getElementsByClassName("logoCompany");
+for(let logo of logohover){
+    let imagen = logo.querySelector("img");
+    let originalLogo = imagen.src;
+    logo.addEventListener("mouseenter", (e) => {
+        console.log("El mouse está sobre el logo ");
+        let logoalt = imagen.alt;
+        console.log("Alt: "+logoalt);
+        imagen.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`;
+    });
+
+    logo.addEventListener("mouseleave", (e) => {
+        console.log("El mouse ha salido de el logo ");
+        imagen.src= originalLogo;
+    });
+}
+
 
 // Función para cerrar la página
 function salir() {
+    pulsarBoton();
     if (window.open) {
         alert("¡Gracias por usar la página!");
-        
         window.close();
     } else {
         alert("Esta ventana no puede cerrarse manualmente. Serás redirigido.");
@@ -43,13 +51,19 @@ function salir() {
 }
 //Mostrar tutorial
 function js_tutorial(id) {
-    var detalle = document.getElementById(id);
+    pulsarBoton();
+    const detalle = document.getElementById(id);
     if (detalle.style.display === "block") {
         detalle.style.display = "none";
     } else {
         detalle.style.display = "block";
     }
 }
+
+const musicaFondo = new Audio("../Knucklebones/Assets/sfx/Cult of the Lamb [Official] - Start a Cult - River Boy (youtube).mp3");
+musicaFondo.loop = true;
+let musicOn = true;
+const fondoBotonMusica = document.getElementById("BotonMusica");
 //Música
 function controlBGMusica(){
     if(musicOn===true){
@@ -63,16 +77,25 @@ function controlBGMusica(){
         fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
     }
 }
-//Tocar Botones Sonido
-document.addEventListener("DOMContentLoaded", function() {
-    if (hoverBoton) {
-        hoverBoton.addEventListener("pointerenter", () => {
-            acariciarBoton.play();
-        });
-    }
-});
+//Pulsar botón Sonido
+function pulsarBoton() {	
+    let tocarBoton = new Audio("../Knucklebones/Assets/sfx/pulsarBoton.mp3");
+	tocarBoton.play();
+}
+//Acariciar/Hover botón sonido
+const botonHover = document.getElementsByClassName("botonDecorado");
+for(let boton of botonHover){
+    let acariciarBoton = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
+    boton.addEventListener("mouseenter", (e) => {
+        console.log("El mouse está sobre el botón");
+        acariciarBoton.play();
+    });
+}
+
+
 //Ir al juego
 function jugar(){
+    pulsarBoton();
 	 window.location.href = "../Knucklebones/Juego.html";
 }
 

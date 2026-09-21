@@ -39,7 +39,7 @@
         <img id="imagenCambiante" src="Assets/img/oro.png" alt="Oro/Muerte"/>
         <div class="scroll-left-container">
             <div class="scroll-left">
-                <p id="subTexto">Un juego de riesgo y ganancias</p>
+                <p id="subTexto" class="textoAnimado" >Un juego de riesgo y ganancias</p>
             </div>
         </div>
     </nav>
@@ -53,21 +53,33 @@
             <li><button class="botonDecorado clickBoton" onclick="js_tutorial('tutorial') ">Cómo Jugar</button></li>
                 <div id="tutorial" class="css_Tutorial">
                     <div id="CajaTutorial">
-                        <div id="cajaTituloTutorial">
-                            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                        <div id="cajaTituloTutorial_inicial">
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
                             <p id="tituloTextoTutorial">OBJETIVO</p>
-                            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
                         </div>
                         <p id="textoTutorial">Consigue más puntos que tu oponente colocando dados en tres columnas.</p>
-                        <p id="tituloTextoTutorial">PREPARACIÓN</p>
+                         <div id="cajaTituloTutorial">
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p id="tituloTextoTutorial">PREPARACIÓN</p>
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                        </div>
                         <p id="textoTutorial">Cada jugador tiene nueve dados de seis caras. Hay un tablero compartido con 3 columnas.</p>
-                        <p id="tituloTextoTutorial">GAMEPLAY</p>
+                        <div id="cajaTituloTutorial">
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p id="tituloTextoTutorial">GAMEPLAY</p>
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                        </div>
                         <ol type="1" id="textoTutorial">
                             <li>Los jugadores se turnan para lanzar un dado.</li>
                             <li>Coloca el dado lanzado en cualquiera de tus tres columnas.</li>
                             <li>Cada columna puede contener un máximo de tres dados.</li>
                         </ol>
-                        <p id="tituloTextoTutorial">REGLAS</p>
+                        <div id="cajaTituloTutorial">
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p id="tituloTextoTutorial">REGLAS</p>
+                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                        </div>
                         <p id="textoTutorial"><b>Retirar los dados del oponente:</b> Cuando colocas un dado, retiras todos los <br>
                             dados de tu oponente del mismo valor en la misma columna. </p>
                         <p id="textoTutorial"><b>Multiplicadores de puntuación:</b> Los dados del mismo valor dentro de una sola <br>
@@ -86,15 +98,14 @@
         <p>Trabajo realizado por &copyAdriana Remiro Autric 2026</p>
         <p>Gracias especiales a:</p>
         <div class="specialThanks">
-            <a href="https://massivemonster.com/" target="_blank" rel="noopener noreferrer"> <!--_blank: Lo abre en una nueva pestaña//nooponer noreferrer:  prevenir el tipo de phishing conocido como tabnabbing.(Tabnabbing, algunas veces llamado reverse tabnabbing, es un exploit que usa el comportamiento por defecto del navegador con target="_blank" para ganar acceso parcial a tu página a través window.object API.)-->
-                <img id="MassiveMonster" src="Assets/img/Company-Logo_Massive-Monster.png" alt="MassiveMonsterLogo" />
-                <img id="MassiveMonsterBlue" src="Assets/img/Company-Logo_Massive-Monster_hover.png" alt="MassiveMonsterLogo" />
+            <a href="https://massivemonster.com/" target="_blank" rel="noopener noreferrer" class="logoCompany"> <!--_blank: Lo abre en una nueva pestaña//nooponer noreferrer:  prevenir el tipo de phishing conocido como tabnabbing.(Tabnabbing, algunas veces llamado reverse tabnabbing, es un exploit que usa el comportamiento por defecto del navegador con target="_blank" para ganar acceso parcial a tu página a través window.object API.)-->
+                <img id="MassiveMonster" src="Assets/img/Company-Logo_Massive-Monster.png" alt="Company-Logo_Massive-Monster" />
             </a>
-            <a href="https://www.devolverdigital.com/" target="_blank" rel="noopener noreferrer">
-                <img id="DevolverDigital" src="Assets/img/Devolver_Digital-Logo.wine.png" alt="DevolverDigitalLogo"/>
+            <a href="https://www.devolverdigital.com/" target="_blank" rel="noopener noreferrer" class="logoCompany">
+                <img id="DevolverDigital"  src="Assets/img/Devolver_Digital-Logo.wine.png" alt="Devolver_Digital-Logo.wine"/>
             </a>
-            <a href="https://cultivis.netlify.app/" target="_blank" rel="noopener noreferrer">
-                <img id="CultiVis" src="Assets/img/favicon.png" alt="CultiVisLogo"/>
+            <a href="https://cultivis.netlify.app/" target="_blank" rel="noopener noreferrer" class="logoCompany">
+                <img id="CultiVis" src="Assets/img/favicon.png" alt="favicon"/>
             </a>
         </div>
     </footer>

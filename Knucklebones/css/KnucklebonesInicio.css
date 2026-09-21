@@ -88,17 +88,6 @@ footer{
   transform: scale(1);
   z-index: -1;
 }
-#MassiveMonster:hover {
-  opacity: 0;
-}
-#MassiveMonsterBlue{
-  z-index: 1;
-  
-  /*display: none; //  display: contents;*/
-}
-#MassiveMonsterBlue:hover{
-   z-index: 1;
-}
 #DevolverDigital {
   transform: scale(1);
 }
@@ -128,30 +117,40 @@ nav{
   font-size: 2.5em;;
   margin-bottom: -6%;
 }
-  /*Texto Scroll*/
-/*.scroll-left-container {
-  overflow: hidden; 
-  position: relative;
+  /*Texto movimiento*/
+.textoAnimado{
+  animation: 
+  cambioColor 5s infinite ease-in-out,
+  movimiento 5s infinite ease-in-out;
 }
-.scroll-left {
-  width: 5vw;
-  height: 5vh;
-  animation: scroll-left 5s linear infinite;
-}
-.scroll-left p {
-  margin: 0;
-  color: #a9a494;
-  font-size: 2.5em;
-}*/
-/*Definir Animación
-@keyframes scroll-left {
+@keyframes movimiento {
   0%{
-    transform: translateX(50%); 		
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
   }
   100%{
-    transform: translateX(-50%); 
+    transform: scale(1);
   }
-}*/
+}
+@keyframes cambioColor {
+  0%{
+    color: #a9a494;
+  }
+  25%{
+    color: #aea071;
+  }
+  50%{
+    color: #a99552;
+  }
+  75%{
+    color: #aea071;
+  }
+  100%{
+    color: #a9a494;
+  }
+}
 
 /*Botones*/
 button{
@@ -202,18 +201,32 @@ button{
   padding-bottom: 4vh;
 
 }
+#cajaTituloTutorial_inicial{
+  display: flex;          
+  flex-direction: row;    
+  align-items: center;    
+  justify-content: center;
+  gap: 10px;
+}
 #cajaTituloTutorial{
-  display: flex;          /* Asegúrate de que el contenedor padre use flex */
-  flex-direction: row;    /* Esto ya está bien */
+  display: flex;          
+  flex-direction: row;    
   align-items: center;    /* Centra verticalmente los elementos */
   justify-content: center; /* Centra horizontalmente los elementos */
-  gap: 10px;             /* Espacio entre los elementos (opcional) */
+  gap: 10px;
+  margin-top: -5vh;
 }
 #tituloTextoTutorial{
   color: #f2e9cd;
   font-size: 2em;
   margin-bottom: -2.8vh;
 }
+#Tutorial_Bracket {
+  margin: -1vw;
+  margin-top: 5vh; 
+  transform: scale(0.5); 
+}
+
 #textoTutorial{
   font-size: 1.4em;
   line-height: 1.4;
