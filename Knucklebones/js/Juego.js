@@ -53,6 +53,7 @@ function imprimirTablero(tablero) {
 function generarTirada() {
     const numDado = Math.round(Math.random()*(6 - 1)+1);
     sustituirDado(numDado);
+    sonidoDado();
     return numDado;
 }
     //Sustituir dado en grid
@@ -109,6 +110,7 @@ function ComprobarTableros(dado, columna, tablero){
     for(let i=0;i<tamTablero;i++){
         if(tablero[i][columna]===dado){ //Tiene ese numero, se borra
             tablero[i][columna]=0;
+            perderDados();
         }
     }
     //Llamar a a bajar para que baje si a quedado algún 0 
@@ -241,16 +243,60 @@ function ganador(){
     jugadorGanador = document.getElementById("selectorGanador");
     jugadorGanador.style.display="block";
 
-    if(jugador===false){jugadorGanador.innerHTML = "Ha ganado el jugador A";}
-    else{jugadorGanador.innerHTML = "Ha ganado el jugador B";}
+    if(jugador===false){jugadorGanador.innerHTML = "Ha ganado el jugador B";}
+    else{jugadorGanador.innerHTML = "Ha ganado el jugador A";}
 }
 /////////////////////////////////////////////////////
-//Música Fondo
+//Reacciones de los personajes
+    //Volver al idle
+function volverIdle(){
+    let cordero = document.getElementById("PersonajeA");
+    let cabra = document.getElementById("PersonajeB");
+    cordero.src = "../Knucklebones/Assets/img/cordero_idle.gif";
+    cabra.src = "../Knucklebones/Assets/img/cabra_idle.gif";
+}
+    //Perder dados
+async function perderDados(){
+    jugador=!jugador;//Porque le quitas al contrario
+    let cordero = document.getElementById("PersonajeA");
+    let cabra = document.getElementById("PersonajeB");
+    if(jugador===false){//Cordero
+        console.log("CambiarCordero");
+        cordero.src = "../Knucklebones/Assets/img/cordero_enfadado.gif";
+        cabra.src = "../Knucklebones/Assets/img/cabra_feliz.gif"
+    }
+    else{//Cabra
+        console.log("CambiarCabra");
+        cabra.src = "../Knucklebones/Assets/img/cabra_enfadado.gif";
+        cordero.src = "../Knucklebones/Assets/img/cordero_feliz.gif";
+    }
+    jugador=!jugador;
+    await sleep(2400);
+    volverIdle();
+}
+//Sonido Dado
+function sonidoDado(){
+    const sonidoDado = new Audio("../Knucklebones/Assets/sfx/dado.mp3");
+    sonidoDado.play();
+}
+/////////////////////////////////////////////////////
+//Sleep
+function sleep(milisegundos) {
+    return new Promise(resolve=>
+        setTimeout(resolve, milisegundos));
+}
+/////////////////////////////////////////////////////
+//Sfx
     //Música variables
 const musicaFondo = new Audio("../Knucklebones/Assets/sfx/Cult of the Lamb [Official] - Knucklebones - River Boy (youtube).mp3");
 musicaFondo.loop = true;
 let musicOn = true;
 const fondoBotonMusica = document.getElementById("BotonMusica");
+    //ColocarDado
+function colocarDado(){
+    let colocarDado = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
+        colocarDado.play();
+}
 
 function controlBGMusica(){
     if(musicOn==true){

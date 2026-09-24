@@ -83,7 +83,7 @@ button{
 }
 #ContenedorTableros{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     place-items: center; 
 }
 .jugador{
@@ -92,23 +92,43 @@ button{
 
     margin: 1vh 1vw;
 
-    background-color: blue;
+    background-image:  url("../Assets/img/madera.jpg");
 }
 #Dado{
-    background-color: green;
+    background-color: rgb(233, 233, 144);
 
     width: 5vw;
     height: 10vh;
     margin: 3vh 3vw;
 
+    display: flex;
     align-items: center;
     justify-content: center;
 }
-.Tablero{
+#TableroA{
     display: grid;
     grid-template-columns: auto auto auto;
 
-    background-color: purple;
+    background-image:  url("../Assets/img/TerciopeloRojo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 20vw;
+    height: 20vh ;
+    margin: 3vh 3vw;
+
+    align-items: center;
+    justify-content: center;
+}
+#TableroB{
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    background-image:  url("../Assets/img/TerciopeloMorado.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     width: 20vw;
     height: 20vh ;
@@ -119,10 +139,9 @@ button{
 }
 .ColumnasT{
     margin: 1vh 1vw;
-    background-color: darkblue;
+    background-color: rgb(233, 233, 144);
 }
 .ColumnasT:hover{
-
     display:block;
 
     border-width: thick;
@@ -149,4 +168,13 @@ button{
     padding: 5%;
     text-align: center;
     display:none;
+}
+.ObjetoInvisible{
+    opacity: 0%;
+}
+.personaje{
+    position: relative;
+    width: 12.3vw;
+    height: 25.1vh;
+    margin: 1.5vw;
 }
