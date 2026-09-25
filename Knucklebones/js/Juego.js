@@ -58,7 +58,7 @@ function generarTirada() {
 }
     //Sustituir dado en grid
 function sustituirDado(numDado){
-    document.getElementById("Dado").innerHTML = numDado;
+    document.getElementById("Dado").textContent = numDado;
 }
 //Selector de columna
 function selecColumna() {
@@ -223,28 +223,30 @@ async function partida(){ //Asyc para que funcione el await
         partidaAcabada = CondicionFinPartida(tableros[Number(jugador)]);       
     }
 }
-function reiniciarPartida(){
+const reiniciar = document.getElementById("reiniciarPagina");
+reiniciar.addEventListener("clcik", () =>{
     location.reload(); 
-}
+});
 /////////////////////////////////////////////////////
 //Cosas visuales del tablero
 //Selector de turno
 function turnoDe(){
     turno = document.getElementById("selectorTurno");
-    if(jugador===false){turno.innerHTML = "Turno de jugador A";}
-    else{turno.innerHTML = "Turno de jugador B";}
+    if(jugador===false){turno.textContent = "Turno de jugador A";}
+    else{turno.textContent = "Turno de jugador B";}
 }
 function mostrarPuntuacion(num){
     if (jugador === false) {puntuacion = document.getElementById("puntuacionA");} 
     else {puntuacion = document.getElementById("puntuacionB");}
-    puntuacion.innerHTML = `Puntuación: ${num}`; 
+    puntuacion.textContent = `Puntuación: ${num}`; 
 }
 function ganador(){
     jugadorGanador = document.getElementById("selectorGanador");
-    jugadorGanador.style.display="block";
+    contenedor = document.getElementById("contenedorGanador");
+    contenedor.style.display="block";
 
-    if(jugador===false){jugadorGanador.innerHTML = "Ha ganado el jugador B";}
-    else{jugadorGanador.innerHTML = "Ha ganado el jugador A";}
+    if(jugador===false){jugadorGanador.textContent = "Ha ganado el jugador B";}
+    else{jugadorGanador.textContent = "Ha ganado el jugador A";}
 }
 /////////////////////////////////////////////////////
 //Reacciones de los personajes
@@ -298,8 +300,8 @@ function colocarDado(){
         colocarDado.play();
 }
 
-function controlBGMusica(){
-    if(musicOn==true){
+fondoBotonMusica.addEventListener("click",() =>{
+    if(musicOn===true){
         musicaFondo.play();
         musicOn=false;
         fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/Music.png')";
@@ -309,7 +311,7 @@ function controlBGMusica(){
          musicOn=true;
         fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
     }
-}
+});
 //MAIN
 function main() {
     partida();

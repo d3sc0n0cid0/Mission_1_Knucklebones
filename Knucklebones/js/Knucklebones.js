@@ -39,7 +39,8 @@ for(let logo of logohover){
 
 
 // Función para cerrar la página
-function salir() {
+const salir = document.getElementById("botonSalir");
+salir.addEventListener("click", () => {
     pulsarBoton();
     if (window.open) {
         alert("¡Gracias por usar la página!");
@@ -48,24 +49,27 @@ function salir() {
         alert("Esta ventana no puede cerrarse manualmente. Serás redirigido.");
         window.location.href = "https://youtu.be/dQw4w9WgXcQ?si=rp3heCkYsmgmAeiW";
     }
-}
+});
+
 //Mostrar tutorial
-function js_tutorial(id) {
+const botonTutotial = document.getElementById("botonTutotial");
+
+botonTutotial.addEventListener("click", () => {
     pulsarBoton();
-    const detalle = document.getElementById(id);
+    const detalle = document.getElementById("tutorial");
     if (detalle.style.display === "block") {
         detalle.style.display = "none";
     } else {
         detalle.style.display = "block";
     }
-}
+});
 
 const musicaFondo = new Audio("../Knucklebones/Assets/sfx/Cult of the Lamb [Official] - Start a Cult - River Boy (youtube).mp3");
 musicaFondo.loop = true;
 let musicOn = true;
 const fondoBotonMusica = document.getElementById("BotonMusica");
 //Música
-function controlBGMusica(){
+fondoBotonMusica.addEventListener("click",() =>{
     if(musicOn===true){
         musicaFondo.play();
         musicOn=false;
@@ -76,7 +80,7 @@ function controlBGMusica(){
          musicOn=true;
         fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
     }
-}
+});
 //Pulsar botón Sonido
 function pulsarBoton() {	
     let tocarBoton = new Audio("../Knucklebones/Assets/sfx/pulsarBoton.mp3");
@@ -86,7 +90,7 @@ function pulsarBoton() {
 const botonHover = document.getElementsByClassName("botonDecorado");
 for(let boton of botonHover){
     let acariciarBoton = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
-    boton.addEventListener("mouseenter", (e) => {
+    boton.addEventListener("mouseenter", () => {
         console.log("El mouse está sobre el botón");
         acariciarBoton.play();
     });
@@ -94,10 +98,11 @@ for(let boton of botonHover){
 
 
 //Ir al juego
-function jugar(){
+const comenzarJuego = document.getElementById("botonComenzarJuego");
+comenzarJuego.addEventListener("click",()=>{
     pulsarBoton();
 	 window.location.href = "../Knucklebones/Juego.html";
-}
+});
 
 // MAIN
 function main() {

@@ -25,7 +25,7 @@
         <p>Este mensaje solo se muestra si JavaScript está desactivado</p>
     </noscript>
     <!--Música-->
-    <button id="BotonMusica" onclick="controlBGMusica()"></button>
+    <button id="BotonMusica"></button>
     <!--Separación-->
     <header>
         <div class="TituloPrincipal">
@@ -47,10 +47,10 @@
     <section>
          <ul>
             <li>
-                <button class="botonDecorado botonSound1" onclick="jugar()">Jugar</button>
+                <button id="botonComenzarJuego" class="botonDecorado botonSound1">Jugar</button>
             </li>
             
-            <li><button class="botonDecorado clickBoton" onclick="js_tutorial('tutorial') ">Cómo Jugar</button></li>
+            <li><button id="botonTutotial" class="botonDecorado clickBoton"">Cómo Jugar</button></li>
                 <div id="tutorial" class="css_Tutorial">
                     <div id="CajaTutorial">
                         <div id="cajaTituloTutorial_inicial">
@@ -90,7 +90,7 @@
                         <p id="textoTutorial">Los jugadores suman el valor de todos sus dados, aplicando cualquier multiplicador. <br> El jugador con la puntuación total más alta gana</p>
                     </div>
                 </div>
-            <li><button  class="botonDecorado" onclick="salir()">Salir</button></li>
+            <li><button id="botonSalir" class="botonDecorado">Salir</button></li>
         </ul>
     </section>
     <!--Separación-->
