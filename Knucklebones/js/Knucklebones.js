@@ -19,15 +19,15 @@ function CambioImagen() {
 ///////////////////////////////////////////////////////////////////////////////////
 //Cambiar logo cuando hover
 const logohover = document.getElementsByClassName("logoCompany");
-for(let logo of logohover){
-    let imagen = logo.querySelector("img");
-    let originalLogo = imagen.src;
+for(let logo of logohover){//Para cada logo 
+    let imagen = logo.querySelector("img");//Toma la primera imagen
+    let originalLogo = imagen.src;//Guardamos la imagen orignal
     logo.addEventListener("mouseenter", () => {//Mouse sobre el logo
         let logoalt = imagen.alt;
-        imagen.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`;
+        imagen.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`; //Cambiamos la imagen por la alterada
     });
     logo.addEventListener("mouseleave", () => {//Mouse sale del logo
-        imagen.src= originalLogo;
+        imagen.src= originalLogo; //La imagen vuelve a la original
     });
 }
 ///////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@ for(let logo of logohover){
 const salir = document.getElementById("botonSalir");
 salir.addEventListener("click", () => {
     pulsarBoton();
-    if (window.open) {
+    if (window.open) {//Si la ventana está abierta, la cierra
         window.close();
     }
 });
@@ -45,9 +45,9 @@ const botonTutotial = document.getElementById("botonTutotial");
 botonTutotial.addEventListener("click", () => {
     pulsarBoton();
     const detalle = document.getElementById("tutorial");
-    if (detalle.style.display === "block") {
+    if (detalle.style.display === "block") { //Muestra el texto
         detalle.style.display = "none";
-    } else {
+    } else {//Oculta el texto
         detalle.style.display = "block";
     }
 });
@@ -55,7 +55,7 @@ botonTutotial.addEventListener("click", () => {
 const comenzarJuego = document.getElementById("botonComenzarJuego");
 comenzarJuego.addEventListener("click",()=>{
     pulsarBoton();
-	 window.location.href = "../Knucklebones/Juego.html";
+	 window.location.href = "../Knucklebones/Juego.html";//Abre la pestaña sobre si misma a la de juego
 });
 ///////////////////////////////////////////////////////////////////////////////////
 //Lógica del sonido y de la música
@@ -72,7 +72,7 @@ function pulsarBoton() {
 }
     //Hover botón sonido
 const botonHover = document.getElementsByClassName("botonDecorado");
-for(let boton of botonHover){
+for(let boton of botonHover){//A todos los botones
     let acariciarBoton = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
     boton.addEventListener("mouseenter", () => {
         acariciarBoton.play();
