@@ -22,18 +22,15 @@ function CambioImagen() {
 //Cambiar logo cuando hover
 const logohover = document.getElementsByClassName("logoCompany");
 for(let logo of logohover){
-    let imagen = logo.querySelector("img");
-    let originalLogo = imagen.src;
-    logo.addEventListener("mouseenter", (e) => {
-        console.log("El mouse está sobre el logo ");
-        let logoalt = imagen.alt;
-        console.log("Alt: "+logoalt);
-        imagen.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`;
+    let imagenLogo = logo.querySelector("img");
+    let originalLogo = imagenLogo.src;
+    logo.addEventListener("mouseenter", (e) => { //Detecta si el mouse está sobre el logo
+        let logoalt = imagenLogo.alt;
+        imagenLogo.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`;
     });
 
-    logo.addEventListener("mouseleave", (e) => {
-        console.log("El mouse ha salido de el logo ");
-        imagen.src= originalLogo;
+    logo.addEventListener("mouseleave", (e) => { //Detecta si el mouse ha salido del logo
+        imagenLogo.src= originalLogo;
     });
 }
 
@@ -90,8 +87,7 @@ function pulsarBoton() {
 const botonHover = document.getElementsByClassName("botonDecorado");
 for(let boton of botonHover){
     let acariciarBoton = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
-    boton.addEventListener("mouseenter", () => {
-        console.log("El mouse está sobre el botón");
+    boton.addEventListener("mouseenter", () => {//Detecta si el mouse está sobre el logo
         acariciarBoton.play();
     });
 }
@@ -101,7 +97,7 @@ for(let boton of botonHover){
 const comenzarJuego = document.getElementById("botonComenzarJuego");
 comenzarJuego.addEventListener("click",()=>{
     pulsarBoton();
-	 window.location.href = "../Knucklebones/Juego.html";
+	window.location.href = "../Knucklebones/Juego.html";
 });
 
 // MAIN

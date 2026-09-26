@@ -81,7 +81,7 @@ button{
     grid-template-columns: auto;
     place-items: center; 
 }
-#ContenedorTableros{
+.ContenedorTableros{
     display: grid;
     grid-template-columns: auto auto auto;
     place-items: center; 
@@ -158,8 +158,9 @@ button{
 
 /*Cosas visuales del tablero*/
 /*Selector ganador*/
-#selectorGanador {
-    background-color: chocolate;
+#contenedorGanador {
+    background-color: rgb(0, 0, 0);
+    text-decoration-color: bisque;
     z-index: 2;
     position: fixed;
     top: 50%; 

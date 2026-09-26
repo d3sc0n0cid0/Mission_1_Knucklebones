@@ -2,6 +2,8 @@
     //Tablero
     const tamTablero = 3;
     let jugador; 
+    let puntuacionA=0;
+    let puntuacionB=0;
     //Lo pongo con var aunque no sea lo común porque es necesario para
     //una función clave y si no tengo que hacer que jugador sea arratrado 
     //por muchas funciones y además necesito que pueda cambiar
@@ -70,10 +72,8 @@ function selecColumna() {
         const handleClick = (event) => {
             const columnaElement = event.currentTarget;
             let numColumStr = columnaElement.getAttribute('data-columna');
-            //console.log("Valor de data-columna:", numColumStr);
 
             let numColum = parseInt(numColumStr);
-            //console.log("Valor convertido a número:", numColum);
 
             // Resolver la promesa con la columna seleccionada
             resolve(numColum);
@@ -142,24 +142,30 @@ function bajarNum(pos, columna, tablero){
 function calcPuntuacion(tablero){
     let puntuacionTotal = 0;
     let puntuacionColumna = 0;
-    let filaArray = [[0],[0],[0],[0],[0],[0],[0]];
-    for(let columna=0;columna<tamTablero;columna++){//Separamos columnas
+    let filaArray = (Array(7).fill(0));//Un array unidimensional de (0-6)
+
+    for(let columna=0;columna<tamTablero;columna++){//Separamos columnas, para calcular el valor de cada una y comprobar si hay que multiplicar algún valor repetido
         for(let fila=0;fila<tamTablero;fila++){
             let num = tablero[fila][columna];
             filaArray[num] +=1; //Contamos cuanto de cada número hay
         }
         //Ahora confirmamos si ese valor no ha estado antes es decir, si es igual a un número que ya ha aparecido en 
         //La columna, se multiplica por el número de veces que ha aparecido (2,2,2->8)
-        for(let i=0;i<=6;i++){
-            puntuacionColumna += i * filaArray[i];
+        for(let i=1;i<=6;i++){//Pasamos por cada número
+            if (filaArray[i] > 1 && i!=1) { //Hacemos una elevación excepto si es uno porque eso lo vamos a sumar porque si no da [1,1,1] = 1 y no tendrías ventaja así que mejor [1,1,1]=3
+                puntuacionColumna += Math.pow(i, filaArray[i]); //Elevamos 
+            } else if (filaArray[i] === 1 && i!=1) { // Sumamos el valor base si 
+                puntuacionColumna += i;
+            }
+            if(i===1){//Si estamos en el caso del número uno, multiplicamos en vez de elevar para que no de 1
+                puntuacionColumna += i*filaArray[i];
+            }
         }
         puntuacionTotal+=puntuacionColumna;
         //Reiniciamos para la siguiente columna
         puntuacionColumna=0;
-        filaArray = [[0],[0],[0],[0],[0],[0],[0]]; 
+        filaArray =(Array(7).fill(0));//Reinicio a 0 para la siguiente columna
     }
-    console.log("Puntuación Final:");
-    console.log(puntuacionTotal);
     mostrarPuntuacion(puntuacionTotal);
 }
 //Condicion de fin de partida: El tablero A o B está lleno
@@ -206,7 +212,6 @@ async function partida(){ //Asyc para que funcione el await
             //Colocar Dado
         do{
             columna = await selecColumna();
-                 //console.log(columna);
             columnaLlena = InsertarDadoColumna(dado, columna, tableros[Number(jugador)]) //Me daba error si no cambiaba a un number
         }while(columnaLlena===false);
         
@@ -223,10 +228,7 @@ async function partida(){ //Asyc para que funcione el await
         partidaAcabada = CondicionFinPartida(tableros[Number(jugador)]);       
     }
 }
-const reiniciar = document.getElementById("reiniciarPagina");
-reiniciar.addEventListener("clcik", () =>{
-    location.reload(); 
-});
+
 /////////////////////////////////////////////////////
 //Cosas visuales del tablero
 //Selector de turno
@@ -236,18 +238,31 @@ function turnoDe(){
     else{turno.textContent = "Turno de jugador B";}
 }
 function mostrarPuntuacion(num){
-    if (jugador === false) {puntuacion = document.getElementById("puntuacionA");} 
-    else {puntuacion = document.getElementById("puntuacionB");}
+    if (jugador === false) {puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
+    else {puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
     puntuacion.textContent = `Puntuación: ${num}`; 
 }
 function ganador(){
-    jugadorGanador = document.getElementById("selectorGanador");
-    contenedor = document.getElementById("contenedorGanador");
+    const jugadorGanador = document.getElementById("selectorGanador");
+    const contenedor = document.getElementById("contenedorGanador");
     contenedor.style.display="block";
-
-    if(jugador===false){jugadorGanador.textContent = "Ha ganado el jugador B";}
-    else{jugadorGanador.textContent = "Ha ganado el jugador A";}
+    
+    if(puntuacionA<puntuacionB){
+        jugadorGanador.textContent = "Ha ganado el jugador B";
+    }
+    else if(puntuacionA>puntuacionB){
+        jugadorGanador.textContent = "Ha ganado el jugador A";
+    }
+    else{
+         jugadorGanador.textContent = "Ha habido un empate";
+    }
 }
+//Reinicio de la partida, fuera para que no se añada múltiples veces el addEventListener
+const reiniciar = document.getElementById("reiniciarPagina");
+    reiniciar.addEventListener("click", () =>{
+        console.log("Reiniciando");
+        location.reload(); 
+    });
 /////////////////////////////////////////////////////
 //Reacciones de los personajes
     //Volver al idle
@@ -263,12 +278,10 @@ async function perderDados(){
     let cordero = document.getElementById("PersonajeA");
     let cabra = document.getElementById("PersonajeB");
     if(jugador===false){//Cordero
-        console.log("CambiarCordero");
         cordero.src = "../Knucklebones/Assets/img/cordero_enfadado.gif";
         cabra.src = "../Knucklebones/Assets/img/cabra_feliz.gif"
     }
     else{//Cabra
-        console.log("CambiarCabra");
         cabra.src = "../Knucklebones/Assets/img/cabra_enfadado.gif";
         cordero.src = "../Knucklebones/Assets/img/cordero_feliz.gif";
     }
