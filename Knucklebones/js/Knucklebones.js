@@ -1,4 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////
 //Lógica de las imágenes que cambian oro/calavera
 const imagen = document.getElementById("imagenCambiante");
 const imagenesPosibles = ["../Knucklebones/Assets/img/oro.png", "../Knucklebones/Assets/img/muerte.png"];
@@ -6,7 +5,7 @@ let indice = 0;
 let intervaloCambio; // Variable para almacenar el intervalo
     // Generar número aleatorio
 function generarTiempoRandom() {
-    return Math.round(Math.random()*(7000 - 5000)+5000);
+    return Math.round(Math.random()*(5000 - 2000)+2000);
 }
     // Cambiar imagen
 function CambioImagen() {
@@ -14,8 +13,8 @@ function CambioImagen() {
     imagen.src = imagenesPosibles[indice];
     indice = (indice + 1) % imagenesPosibles.length; // Alterna entre 0 y lenght (que en este caso va a ser 1)
     //Cambio aleatorio y constante
-    let randTime = generarTiempoRandom();
-    setInterval(CambioImagen, randTime);
+    let tiempo = generarTiempoRandom();
+    setTimeout(CambioImagen, tiempo);
 }
 ///////////////////////////////////////////////////////////////////////////////////
 //Cambiar logo cuando hover
@@ -82,7 +81,8 @@ for(let boton of botonHover){
 ///////////////////////////////////////////////////////////////////////////////////
 // MAIN
 function main() {
-    CambioImagen();
+    let tiempo = generarTiempoRandom();
+    setTimeout(CambioImagen, tiempo);
 }
 // Llamar a main cuando la página cargue
 window.onload = main;
