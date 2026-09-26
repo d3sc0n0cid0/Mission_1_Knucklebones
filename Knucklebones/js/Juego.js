@@ -33,14 +33,15 @@ function sustituirDado(numDado){
 }
     //Selector de turno, muestra a quien le toca colocar
 function turnoDe(){
-    turno = document.getElementById("selectorTurno");
+    const turno = document.getElementById("selectorTurno");
     if(jugador===false){turno.textContent = "Turno de jugador A";}
     else{turno.textContent = "Turno de jugador B";}
 }
     //Mostrar puntuación, muestra la puntuación de cada jugador
 function mostrarPuntuacion(num){
-    if (jugador === false) {puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
-    else {puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
+    let puntuacion;
+    if (jugador === false) { puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
+    else { puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
     puntuacion.textContent = `Puntuación: ${num}`; 
 }
     //Mostrar ganador muestra quien gana una vez seacaba la partida
@@ -284,22 +285,12 @@ function sleep(milisegundos) {
 }
 /////////////////////////////////////////////////////
 //Sfx
-    //Música variables
-const musicaFondo = new Audio("../Knucklebones/Assets/sfx/juego.mp3");
-musicaFondo.loop = true;
-let musicOn = true;
-const fondoBotonMusica = document.getElementById("BotonMusica");
-fondoBotonMusica.addEventListener("click",() =>{
-    if(musicOn===true){
-        musicaFondo.play();
-        musicOn=false;
-        fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/Music.png')";
-    }
-    else{
-         musicaFondo.pause();
-         musicOn=true;
-        fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
-    }
+//Música backgorund
+import { cargarMusica, controlMusica } from './musica.js';//Exportamos de musica.js para usar las funciones
+cargarMusica("../Knucklebones/Assets/sfx/inicio.mp3");
+const musicButton = document.getElementById("BotonMusica");
+musicButton.addEventListener("click", () => {
+    controlMusica("BotonMusica"); 
 });
     //Sonido Dado
 function sonidoDado(){
