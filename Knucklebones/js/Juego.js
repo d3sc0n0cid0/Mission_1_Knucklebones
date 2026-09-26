@@ -1,18 +1,16 @@
-//Variables tabla
+//Variables de la tabla
     //Tablero
     const tamTablero = 3;
     let jugador; 
     let puntuacionA=0;
     let puntuacionB=0;
-    //Lo pongo con var aunque no sea lo común porque es necesario para
-    //una función clave y si no tengo que hacer que jugador sea arratrado 
-    //por muchas funciones y además necesito que pueda cambiar
-
-//Sustituir el grid por la matriz
+///////////////////////////////////////////////////////////////////////////////////
+//Lógica para mostrar el apartado visual
+    //Sustituir el grid por la matriz
 function actualizarGridDesdeMatriz(tableroDigital) {
-    let tableroVisual;
-    if (jugador === false) {tableroVisual = document.getElementById("TableroA");} 
-    else {tableroVisual = document.getElementById("TableroB");}
+    let tableroVisual; //Con tablero visual me refuero a lo que se ve en pantalla y no a la lógica del propio tablero
+    if (jugador === false) {tableroVisual = document.getElementById("TableroA");} //Turno jugador A
+    else {tableroVisual = document.getElementById("TableroB");} //Turno jugador B
 
     let columnas = tableroVisual.querySelectorAll(".ColumnasT");
 
@@ -29,7 +27,41 @@ function actualizarGridDesdeMatriz(tableroDigital) {
         });
     });
 }
-//Generar el array de los tableros
+    //Sustituir dado en grid
+function sustituirDado(numDado){
+    document.getElementById("Dado").textContent = numDado;
+}
+    //Selector de turno, muestra a quien le toca colocar
+function turnoDe(){
+    turno = document.getElementById("selectorTurno");
+    if(jugador===false){turno.textContent = "Turno de jugador A";}
+    else{turno.textContent = "Turno de jugador B";}
+}
+    //Mostrar puntuación, muestra la puntuación de cada jugador
+function mostrarPuntuacion(num){
+    if (jugador === false) {puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
+    else {puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
+    puntuacion.textContent = `Puntuación: ${num}`; 
+}
+    //Mostrar ganador muestra quien gana una vez seacaba la partida
+function ganador(){
+    const jugadorGanador = document.getElementById("selectorGanador");
+    const contenedor = document.getElementById("contenedorGanador");
+    contenedor.style.display="block";
+    
+    if(puntuacionA<puntuacionB){
+        jugadorGanador.textContent = "Ha ganado el jugador B";
+    }
+    else if(puntuacionA>puntuacionB){
+        jugadorGanador.textContent = "Ha ganado el jugador A";
+    }
+    else{
+         jugadorGanador.textContent = "Ha habido un empate";
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////
+//Lógica práctica del juego, es decir el cómo funciona en si 
+    //Generar el array de los tableros
 function crearTablero(tablero){
     for(let i=0;i<tamTablero;i++){
         tablero[i]=[];
@@ -40,29 +72,14 @@ function crearTablero(tablero){
     actualizarGridDesdeMatriz(tablero)
     return tablero;
 }
-function imprimirTablero(tablero) {
-    for (let i = 0; i < tamTablero; i++) {
-        let fila = ""; // Variable para almacenar la fila actual
-        for (let j = 0; j < tamTablero; j++) {
-            fila += `[${tablero[i][j] === undefined || tablero[i][j] === null ? " " : tablero[i][j]}]`;
-            //Para que imprima el espacio en blanco si no hay número
-        }
-        console.log(fila); // Imprime la fila completa
-    }
-    console.log("__________");
-}
-//Número aleatorio dado (1-6)
+    //Genera el número aleatorio del dado (1-6)
 function generarTirada() {
     const numDado = Math.round(Math.random()*(6 - 1)+1);
     sustituirDado(numDado);
     sonidoDado();
     return numDado;
 }
-    //Sustituir dado en grid
-function sustituirDado(numDado){
-    document.getElementById("Dado").textContent = numDado;
-}
-//Selector de columna
+    //Selector de columna
 function selecColumna() {
     return new Promise((resolve) => {
         const columnas = document.getElementsByClassName("ColumnasT");
@@ -90,20 +107,19 @@ function selecColumna() {
         });
     });
 }
-//Colocar Dado
+    //Colocar el número del dado en la columna seleccionada
 function InsertarDadoColumna(dado, columna, tablero){
     for(let j=tamTablero-1;j>=0;j--){
         if(tablero[j][columna]===0){
             tablero[j][columna]=dado;
             actualizarGridDesdeMatriz(tablero) //Ha entrado el dado
-            imprimirTablero(tablero);
             return true;
         }
     }
     actualizarGridDesdeMatriz(tablero)
-    return false; //Columna llena
+    return false; //Columna llena, por tanto no es válida esta columna
 }
-//Comprobarción con el tablero contrario
+    //Comprobarción con el tablero contrario
 function ComprobarTableros(dado, columna, tablero){
     //Comprobar si tiene ese número en la columna
     //Quitar dichos números
@@ -123,7 +139,7 @@ function ComprobarTableros(dado, columna, tablero){
     actualizarGridDesdeMatriz(tablero);
     jugador=!jugador;
 }
-//Bajar los número si queda un 0 de por medio
+    //Bajar los número si queda un 0 de por medio
 function bajarNum(pos, columna, tablero){
      if (pos === 0) {
         let num = tablero[pos][columna];
@@ -138,7 +154,7 @@ function bajarNum(pos, columna, tablero){
         return valor;
     }
 }
-//Calculadora de la puntuación
+    //Calculadora de la puntuación
 function calcPuntuacion(tablero){
     let puntuacionTotal = 0;
     let puntuacionColumna = 0;
@@ -168,7 +184,7 @@ function calcPuntuacion(tablero){
     }
     mostrarPuntuacion(puntuacionTotal);
 }
-//Condicion de fin de partida: El tablero A o B está lleno
+    //Condicion de fin de partida: El tablero A o B está lleno
 function CondicionFinPartida(tablero){
      for(let i=0;i<tamTablero;i++){
         for(let j=0;j<tamTablero;j++){
@@ -180,10 +196,9 @@ function CondicionFinPartida(tablero){
     ganador();
     return true;
 }
-
+///////////////////////////////////////////////////////////////////////////////////
 //Partida
 async function partida(){ //Asyc para que funcione el await
-    //Lo que está más tabulado son para que funcione desde consola debido a que son ayuda para mi al programar
     //Inicialización de variables
     jugador = false; //True 1 false 0
     let dado;
@@ -201,10 +216,10 @@ async function partida(){ //Asyc para que funcione el await
 
     const tableros = [tableroA, tableroB];
     //Inicio de partida
-    while(!partidaAcabada){//Tablero lleno
+    while(!partidaAcabada){//Hasta que no se llene uno de los tableros no acaba la partida
         //Cambio de turno al otro jugador
         jugador= !jugador;
-        turnoDe();
+        turnoDe(); //Cambia el texto de a quien le toca
 
         //El jugador coloca el dado que le ha tocado
             //Dado que le toca
@@ -213,7 +228,7 @@ async function partida(){ //Asyc para que funcione el await
         do{
             columna = await selecColumna();
             columnaLlena = InsertarDadoColumna(dado, columna, tableros[Number(jugador)]) //Me daba error si no cambiaba a un number
-        }while(columnaLlena===false);
+        }while(columnaLlena===false);//Hasta que no o colo que en una columna con hueco no acaba
         
         //Comprobación con el tablero del contrario
         ComprobarTableros(dado, columna,tableros[Number(!jugador)]);//Comprobamos el tablero del rival para eliminar duplicados
@@ -228,41 +243,6 @@ async function partida(){ //Asyc para que funcione el await
         partidaAcabada = CondicionFinPartida(tableros[Number(jugador)]);       
     }
 }
-
-/////////////////////////////////////////////////////
-//Cosas visuales del tablero
-//Selector de turno
-function turnoDe(){
-    turno = document.getElementById("selectorTurno");
-    if(jugador===false){turno.textContent = "Turno de jugador A";}
-    else{turno.textContent = "Turno de jugador B";}
-}
-function mostrarPuntuacion(num){
-    if (jugador === false) {puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
-    else {puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
-    puntuacion.textContent = `Puntuación: ${num}`; 
-}
-function ganador(){
-    const jugadorGanador = document.getElementById("selectorGanador");
-    const contenedor = document.getElementById("contenedorGanador");
-    contenedor.style.display="block";
-    
-    if(puntuacionA<puntuacionB){
-        jugadorGanador.textContent = "Ha ganado el jugador B";
-    }
-    else if(puntuacionA>puntuacionB){
-        jugadorGanador.textContent = "Ha ganado el jugador A";
-    }
-    else{
-         jugadorGanador.textContent = "Ha habido un empate";
-    }
-}
-//Reinicio de la partida, fuera para que no se añada múltiples veces el addEventListener
-const reiniciar = document.getElementById("reiniciarPagina");
-    reiniciar.addEventListener("click", () =>{
-        console.log("Reiniciando");
-        location.reload(); 
-    });
 /////////////////////////////////////////////////////
 //Reacciones de los personajes
     //Volver al idle
@@ -289,11 +269,13 @@ async function perderDados(){
     await sleep(2400);
     volverIdle();
 }
-//Sonido Dado
-function sonidoDado(){
-    const sonidoDado = new Audio("../Knucklebones/Assets/sfx/dado.mp3");
-    sonidoDado.play();
-}
+///////////////////////////////////////////////////////////////////////////////////
+//Reinicio de la partida
+const reiniciar = document.getElementById("reiniciarPagina");
+    reiniciar.addEventListener("click", () =>{
+        console.log("Reiniciando");
+        location.reload(); 
+    });
 /////////////////////////////////////////////////////
 //Sleep
 function sleep(milisegundos) {
@@ -307,12 +289,6 @@ const musicaFondo = new Audio("../Knucklebones/Assets/sfx/juego.mp3");
 musicaFondo.loop = true;
 let musicOn = true;
 const fondoBotonMusica = document.getElementById("BotonMusica");
-    //ColocarDado
-function colocarDado(){
-    let colocarDado = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
-        colocarDado.play();
-}
-
 fondoBotonMusica.addEventListener("click",() =>{
     if(musicOn===true){
         musicaFondo.play();
@@ -325,10 +301,13 @@ fondoBotonMusica.addEventListener("click",() =>{
         fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
     }
 });
+    //Sonido Dado
+function sonidoDado(){
+    const sonidoDado = new Audio("../Knucklebones/Assets/sfx/dado.mp3");
+    sonidoDado.play();
+}
 //MAIN
 function main() {
     partida();
 }
-
-// Llamar a main cuando la página cargue
-window.onload = main;
+window.onload = main; // Llamar a main cuando la página cargue
