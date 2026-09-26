@@ -303,7 +303,7 @@ function sleep(milisegundos) {
 /////////////////////////////////////////////////////
 //Sfx
     //Música variables
-const musicaFondo = new Audio("../Knucklebones/Assets/sfx/Cult of the Lamb [Official] - Knucklebones - River Boy (youtube).mp3");
+const musicaFondo = new Audio("../Knucklebones/Assets/sfx/juego.mp3");
 musicaFondo.loop = true;
 let musicOn = true;
 const fondoBotonMusica = document.getElementById("BotonMusica");

@@ -1,56 +1,48 @@
-// Variables globales 
-let randTime;
+///////////////////////////////////////////////////////////////////////////////////
+//Lógica de las imágenes que cambian oro/calavera
 const imagen = document.getElementById("imagenCambiante");
 const imagenesPosibles = ["../Knucklebones/Assets/img/oro.png", "../Knucklebones/Assets/img/muerte.png"];
 let indice = 0;
 let intervaloCambio; // Variable para almacenar el intervalo
-
-// Generar número aleatorio
+    // Generar número aleatorio
 function generarTiempoRandom() {
-    return randTime = Math.round(Math.random()*(7000 - 2000)+2000);
+    return Math.round(Math.random()*(7000 - 5000)+5000);
 }
-// Cambiar imagen
+    // Cambiar imagen
 function CambioImagen() {
-    if (!imagen) {
-        console.error("El elemento 'imagenCambiante' no existe en el DOM.");
-        return;
-    }
+    //Cambio de la imagen 
     imagen.src = imagenesPosibles[indice];
-    indice = (indice + 1) % imagenesPosibles.length; // Alterna entre 0 y 1
-    randTime = generarTiempoRandom();
+    indice = (indice + 1) % imagenesPosibles.length; // Alterna entre 0 y lenght (que en este caso va a ser 1)
+    //Cambio aleatorio y constante
+    let randTime = generarTiempoRandom();
+    setInterval(CambioImagen, randTime);
 }
+///////////////////////////////////////////////////////////////////////////////////
 //Cambiar logo cuando hover
 const logohover = document.getElementsByClassName("logoCompany");
 for(let logo of logohover){
-    let imagenLogo = logo.querySelector("img");
-    let originalLogo = imagenLogo.src;
-    logo.addEventListener("mouseenter", (e) => { //Detecta si el mouse está sobre el logo
-        let logoalt = imagenLogo.alt;
-        imagenLogo.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`;
+    let imagen = logo.querySelector("img");
+    let originalLogo = imagen.src;
+    logo.addEventListener("mouseenter", () => {//Mouse sobre el logo
+        let logoalt = imagen.alt;
+        imagen.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`;
     });
-
-    logo.addEventListener("mouseleave", (e) => { //Detecta si el mouse ha salido del logo
-        imagenLogo.src= originalLogo;
+    logo.addEventListener("mouseleave", () => {//Mouse sale del logo
+        imagen.src= originalLogo;
     });
 }
-
-
-// Función para cerrar la página
+///////////////////////////////////////////////////////////////////////////////////
+//Lógica de los botones de la página (Jugar/CómoJugar/Salir)
+    //Cerrar la página
 const salir = document.getElementById("botonSalir");
 salir.addEventListener("click", () => {
     pulsarBoton();
     if (window.open) {
-        alert("¡Gracias por usar la página!");
         window.close();
-    } else {
-        alert("Esta ventana no puede cerrarse manualmente. Serás redirigido.");
-        window.location.href = "https://youtu.be/dQw4w9WgXcQ?si=rp3heCkYsmgmAeiW";
     }
 });
-
-//Mostrar tutorial
+    //Mostrar tutorial
 const botonTutotial = document.getElementById("botonTutotial");
-
 botonTutotial.addEventListener("click", () => {
     pulsarBoton();
     const detalle = document.getElementById("tutorial");
@@ -60,55 +52,37 @@ botonTutotial.addEventListener("click", () => {
         detalle.style.display = "block";
     }
 });
-
-const musicaFondo = new Audio("../Knucklebones/Assets/sfx/Cult of the Lamb [Official] - Start a Cult - River Boy (youtube).mp3");
-musicaFondo.loop = true;
-let musicOn = true;
-const fondoBotonMusica = document.getElementById("BotonMusica");
-//Música
-fondoBotonMusica.addEventListener("click",() =>{
-    if(musicOn===true){
-        musicaFondo.play();
-        musicOn=false;
-        fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/Music.png')";
-    }
-    else{
-         musicaFondo.pause();
-         musicOn=true;
-        fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
-    }
+    //Ir al juego
+const comenzarJuego = document.getElementById("botonComenzarJuego");
+comenzarJuego.addEventListener("click",()=>{
+    pulsarBoton();
+	 window.location.href = "../Knucklebones/Juego.html";
 });
-//Pulsar botón Sonido
+///////////////////////////////////////////////////////////////////////////////////
+//Lógica del sonido y de la música
+import { cargarMusica, controlMusica } from './musica.js';//Exportamos de musica.js para usar las funciones
+cargarMusica("../Knucklebones/Assets/sfx/inicio.mp3");
+const musicButton = document.getElementById("BotonMusica");
+musicButton.addEventListener("click", () => {
+    controlMusica("BotonMusica"); 
+});
+    //Pulsar botón Sonido
 function pulsarBoton() {	
     let tocarBoton = new Audio("../Knucklebones/Assets/sfx/pulsarBoton.mp3");
 	tocarBoton.play();
 }
-//Acariciar/Hover botón sonido
+    //Hover botón sonido
 const botonHover = document.getElementsByClassName("botonDecorado");
 for(let boton of botonHover){
     let acariciarBoton = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
-    boton.addEventListener("mouseenter", () => {//Detecta si el mouse está sobre el logo
+    boton.addEventListener("mouseenter", () => {
         acariciarBoton.play();
     });
 }
-
-
-//Ir al juego
-const comenzarJuego = document.getElementById("botonComenzarJuego");
-comenzarJuego.addEventListener("click",()=>{
-    pulsarBoton();
-	window.location.href = "../Knucklebones/Juego.html";
-});
-
+///////////////////////////////////////////////////////////////////////////////////
 // MAIN
 function main() {
-    randTime = generarTiempoRandom();
-
-    // Iniciar el intervalo solo una vez
-    if (!intervaloCambio) {
-        intervaloCambio = setInterval(CambioImagen, randTime);
-    }
+    CambioImagen();
 }
-
 // Llamar a main cuando la página cargue
 window.onload = main;
