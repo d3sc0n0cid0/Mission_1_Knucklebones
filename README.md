@@ -77,7 +77,8 @@ https://developer.mozilla.org/es/docs/Web/API/Window/setTimeout
 
 
 Assets:
-Algnos creados/editados por mi
+Algunos creados/editados por mi:
+
 https://www.dafont.com/es/triforce.font?text=cult+of+the+lamb
 https://www.youtube.com/watch?v=y4PfvZiEs5E
 https://shared.akamai.steamstatic.com/community_assets/images/items/1313140/c80d1a3ea315f69f72cbb77bffe42c5ed0f7b945.mp4
