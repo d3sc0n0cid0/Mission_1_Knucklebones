@@ -5,6 +5,30 @@
     let puntuacionA=0;
     let puntuacionB=0;
 ///////////////////////////////////////////////////////////////////////////////////
+//Generación de tablero dinámico, se puede cambiar pero lo dejo en fijo 3x3 porque si no no me gusta como queda
+//Y porque tengo todo colocado con grid-template-columns y auto por lo qeu se quedarían medio raras, pero lógicamete funciona
+//Y si me lo piden lo puedo cambiar y funciona
+function generarTableroDOM(tablero) {
+    const contenedorTablero = document.getElementById(tablero);
+    contenedorTablero.innerHTML = "";
+    //Columnas
+    for (let col = 0; col < tamTablero; col++) {
+        const columnaDiv = document.createElement("div"); //<div> que representará a la columna
+        columnaDiv.classList.add("ColumnasT"); // css "ColumnasT" para que mantenga los estilos
+        columnaDiv.setAttribute("data-columna", col); // Guardo el índice de la columna para cuando haga clic
+        //Filas de las columnas
+        for (let fila = 0; fila < tamTablero; fila++) {
+            const filaDiv = document.createElement("div"); //Para cada casilla individual
+            filaDiv.classList.add("FilasT"); //css
+            const textoP = document.createElement("p"); //Contener Dado
+            textoP.textContent = "0";
+            filaDiv.appendChild(textoP); //El texto va dentro de la casilla
+            columnaDiv.appendChild(filaDiv); //Las filas van dentro de la columna
+        }
+        contenedorTablero.appendChild(columnaDiv);
+    }
+}
+///////////////////////////////////////////////////////////////////////////////////
 //Lógica para mostrar el apartado visual
     //Sustituir el grid por la matriz
 function actualizarGridDesdeMatriz(tableroDigital) {
@@ -200,6 +224,9 @@ function condicionFinPartida(tablero){
 //Partida
 async function partida(){ //Asyc para que funcione el await
     //Inicialización de variables
+    generarTableroDOM("TableroA");
+    generarTableroDOM("TableroB");
+
     jugador = false; //True 1 false 0
     let dado;
     let columna;
@@ -298,3 +325,23 @@ function main() {
     partida();
 }
 window.onload = main; // Llamar a main cuando la página cargue
+
+/*
+Comentarioe extra yey
+Generar columna está basado en cómo estaba creado antes en el html  (lo dejo para verlo mejor)
+                        <div data-columna="0" class="ColumnasT">
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                        </div>
+                        <div data-columna="1" class="ColumnasT">
+                            <div  class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                        </div>
+                        <div data-columna="2" class="ColumnasT">
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                            <div class="FilasT"><p>&nbsp</p></div>
+                        </div>
+*/
