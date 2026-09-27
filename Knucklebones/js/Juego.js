@@ -109,7 +109,7 @@ function selecColumna() {
     });
 }
     //Colocar el número del dado en la columna seleccionada
-function InsertarDadoColumna(dado, columna, tablero){
+function insertarDadoColumna(dado, columna, tablero){
     for(let j=tamTablero-1;j>=0;j--){
         if(tablero[j][columna]===0){
             tablero[j][columna]=dado;
@@ -121,7 +121,7 @@ function InsertarDadoColumna(dado, columna, tablero){
     return false; //Columna llena, por tanto no es válida esta columna
 }
     //Comprobarción con el tablero contrario
-function ComprobarTableros(dado, columna, tablero){
+function comprobarTableros(dado, columna, tablero){
     //Comprobar si tiene ese número en la columna
     //Quitar dichos números
     for(let i=0;i<tamTablero;i++){
@@ -186,7 +186,7 @@ function calcPuntuacion(tablero){
     mostrarPuntuacion(puntuacionTotal);
 }
     //Condicion de fin de partida: El tablero A o B está lleno
-function CondicionFinPartida(tablero){
+function condicionFinPartida(tablero){
      for(let i=0;i<tamTablero;i++){
         for(let j=0;j<tamTablero;j++){
            if(tablero[i][j]===0){
@@ -228,11 +228,11 @@ async function partida(){ //Asyc para que funcione el await
             //Colocar Dado
         do{
             columna = await selecColumna();
-            columnaLlena = InsertarDadoColumna(dado, columna, tableros[Number(jugador)]) //Me daba error si no cambiaba a un number
+            columnaLlena = insertarDadoColumna(dado, columna, tableros[Number(jugador)]) //Me daba error si no cambiaba a un number
         }while(columnaLlena===false);//Hasta que no o colo que en una columna con hueco no acaba
         
         //Comprobación con el tablero del contrario
-        ComprobarTableros(dado, columna,tableros[Number(!jugador)]);//Comprobamos el tablero del rival para eliminar duplicados
+        comprobarTableros(dado, columna,tableros[Number(!jugador)]);//Comprobamos el tablero del rival para eliminar duplicados
 
         //Calculamos la puntuación de ambos tableros
             jugador=!jugador;//Calculo el contrario
@@ -241,7 +241,7 @@ async function partida(){ //Asyc para que funcione el await
             calcPuntuacion(tableros[Number(jugador)]);
 
         //Comprobamos si se ha acabado la partida, si acaba saltar a mensaje de victoria 
-        partidaAcabada = CondicionFinPartida(tableros[Number(jugador)]);       
+        partidaAcabada = condicionFinPartida(tableros[Number(jugador)]);       
     }
 }
 /////////////////////////////////////////////////////
@@ -254,7 +254,7 @@ function volverIdle(){
     cabra.src = "../Knucklebones/Assets/img/cabra_idle.gif";
 }
     //Perder dados
-async function perderDados(){
+    function perderDados(){
     jugador=!jugador;//Porque le quitas al contrario
     let cordero = document.getElementById("PersonajeA");
     let cabra = document.getElementById("PersonajeB");
@@ -267,8 +267,7 @@ async function perderDados(){
         cordero.src = "../Knucklebones/Assets/img/cordero_feliz.gif";
     }
     jugador=!jugador;
-    await sleep(2400);
-    volverIdle();
+    setTimeout(()=>{volverIdle();},2400);//Espera el tiempo puesto y vuelve a idle
 }
 ///////////////////////////////////////////////////////////////////////////////////
 //Reinicio de la partida

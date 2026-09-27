@@ -8,13 +8,13 @@ function generarTiempoRandom() {
     return Math.round(Math.random()*(5000 - 2000)+2000);
 }
     // Cambiar imagen
-function CambioImagen() {
+function cambioImagen() {
     //Cambio de la imagen 
     imagen.src = imagenesPosibles[indice];
     indice = (indice + 1) % imagenesPosibles.length; // Alterna entre 0 y lenght (que en este caso va a ser 1)
     //Cambio aleatorio y constante
     let tiempo = generarTiempoRandom();
-    setTimeout(CambioImagen, tiempo);
+    setTimeout(cambioImagen, tiempo);
 }
 ///////////////////////////////////////////////////////////////////////////////////
 //Cambiar logo cuando hover
@@ -82,7 +82,7 @@ for(let boton of botonHover){//A todos los botones
 // MAIN
 function main() {
     let tiempo = generarTiempoRandom();
-    setTimeout(CambioImagen, tiempo);
+    setTimeout(cambioImagen, tiempo);
 }
 // Llamar a main cuando la página cargue
 window.onload = main;
