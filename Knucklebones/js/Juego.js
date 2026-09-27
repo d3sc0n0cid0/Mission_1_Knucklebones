@@ -285,12 +285,10 @@ function sleep(milisegundos) {
 /////////////////////////////////////////////////////
 //Sfx
 //Música backgorund
-import { cargarMusica, controlMusica } from './musica.js';//Exportamos de musica.js para usar las funciones
-cargarMusica("../Knucklebones/Assets/sfx/inicio.mp3");
+import { inicializar } from './musica.js';//Exportamos de musica.js para usar las funciones
 const musicButton = document.getElementById("BotonMusica");
-musicButton.addEventListener("click", () => {
-    controlMusica("BotonMusica"); 
-});
+inicializar("../Knucklebones/Assets/sfx/juego.mp3", musicButton);
+
     //Sonido Dado
 function sonidoDado(){
     const sonidoDado = new Audio("../Knucklebones/Assets/sfx/dado.mp3");

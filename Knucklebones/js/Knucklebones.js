@@ -59,12 +59,9 @@ comenzarJuego.addEventListener("click",()=>{
 });
 ///////////////////////////////////////////////////////////////////////////////////
 //Lógica del sonido y de la música
-import { cargarMusica, controlMusica } from './musica.js';//Exportamos de musica.js para usar las funciones
-cargarMusica("../Knucklebones/Assets/sfx/inicio.mp3");
+import { inicializar } from './musica.js';//Exportamos de musica.js para usar las funciones
 const musicButton = document.getElementById("BotonMusica");
-musicButton.addEventListener("click", () => {
-    controlMusica("BotonMusica"); 
-});
+inicializar("../Knucklebones/Assets/sfx/inicio.mp3", musicButton);
     //Pulsar botón Sonido
 function pulsarBoton() {	
     let tocarBoton = new Audio("../Knucklebones/Assets/sfx/pulsarBoton.mp3");

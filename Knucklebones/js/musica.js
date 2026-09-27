@@ -3,12 +3,12 @@ let musicOn = true;
 let fondoBotonMusica = null; //Le pasaré el id del botonMusica 
 
 // Para poder exportarlas a los otros js
-export function cargarMusica(ruta) {
+function cargarMusica(ruta) {
     musicaFondo = new Audio(ruta);
     musicaFondo.loop = true; //Para que suene infinitamente
 }
 //Controla la música global
-export function controlMusica(botonId) {
+function controlMusica(botonId) {
     fondoBotonMusica = document.getElementById(botonId);
    if(musicOn){
         musicaFondo.play();
@@ -20,4 +20,11 @@ export function controlMusica(botonId) {
          musicOn=true;
         fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
     }
+}
+
+export function inicializar(ruta, botonId){ //Y ahora esta función es para montar todo sin tener que crearlo fuera
+    cargarMusica(ruta);
+    botonId.addEventListener("click", () => {
+        controlMusica("BotonMusica"); 
+    });
 }

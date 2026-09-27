@@ -231,3 +231,11 @@ button{
   font-size: 1.4em;
   line-height: 1.4;
 }
+
+/*Class list*/
+.oculto {
+   display: none; 
+}
+.visible{
+  display: block;
+}
