@@ -75,7 +75,7 @@ https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/export
 https://developer.mozilla.org/es/docs/Web/API/Window/setInterval
 https://developer.mozilla.org/es/docs/Web/API/Window/setTimeout
 https://www.luisllamas.es/en/insert-and-remove-elements-from-the-dom-javascript/
-
+https://developer.mozilla.org/es/docs/Web/API/Element/classList
 
 Assets:
 Algunos creados/editados por mi:

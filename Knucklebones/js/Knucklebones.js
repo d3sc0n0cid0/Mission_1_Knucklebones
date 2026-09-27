@@ -41,15 +41,11 @@ salir.addEventListener("click", () => {
     }
 });
     //Mostrar tutorial
-const botonTutotial = document.getElementById("botonTutotial");
-botonTutotial.addEventListener("click", () => {
+const botonTutorial = document.getElementById("botonTutotial");
+const tutorial = document.getElementById("tutorial");
+botonTutorial.addEventListener("click", () => {
     pulsarBoton();
-    const detalle = document.getElementById("tutorial");
-    if (detalle.style.display === "block") { //Muestra el texto
-        detalle.style.display = "none";
-    } else {//Oculta el texto
-        detalle.style.display = "block";
-    }
+    tutorial.classList.toggle("oculto"); //Si tiene la clase se la quita, si no la tiene se la pone
 });
     //Ir al juego
 const comenzarJuego = document.getElementById("botonComenzarJuego");

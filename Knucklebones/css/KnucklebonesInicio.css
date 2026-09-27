@@ -177,9 +177,6 @@ button{
 	background-image: url("../Assets/img/Header_BG_Red.png");
 }
 /*Tutorial*/
-#tutorial{
-  display: none;
-}
 .css_Tutorial{
   height: 100%;
   width: 100%;
@@ -226,7 +223,6 @@ button{
   margin-top: 5vh; 
   transform: scale(0.5); 
 }
-
 #textoTutorial{
   font-size: 1.4em;
   line-height: 1.4;
@@ -234,8 +230,5 @@ button{
 
 /*Class list*/
 .oculto {
-   display: none; 
-}
-.visible{
-  display: block;
+  display: none;
 }
