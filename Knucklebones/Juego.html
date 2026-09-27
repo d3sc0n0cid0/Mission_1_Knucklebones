@@ -11,6 +11,7 @@
     <script defer type="module" src="..\Knucklebones\js\musica.js"></script>
     <!--Union con el css--> 
     <link href="..\Knucklebones\css\Juego.css" rel="stylesheet" type="text/css">
+    <link href="..\Knucklebones\css\musica.css" rel="stylesheet" type="text/css">
 
     <!--Vínculo de las fuentes de GoogleFonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,9 +27,9 @@
         <p>Este mensaje solo se muestra si JavaScript está desactivado</p>
     </noscript>
     <!--Música-->
-    <button id="BotonMusica"></button>
+    <button id="BotonMusica" class="botonMusicaFondo"></button>
 
-    <div id="contenedorGanador">
+    <div id="contenedorGanador" class="oculto">
         <p id="selectorGanador">Texto que muestra que jugador ha ganado</p>
         <button id="reiniciarPagina">Volver a jugar</button>
     </div>

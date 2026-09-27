@@ -20,7 +20,6 @@ html {
 
 /*Música*/
 #BotonMusica{
-    background-image: url(../Assets/img/MusicNo.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; 
@@ -34,6 +33,9 @@ html {
     bottom: 5vh;
     right: 1vh; 
     z-index: 2; 
+}
+.botonMusicaFondo{
+  background-image: url(../Assets/img/MusicNo.png);
 }
 #BotonMusica:hover{
   transform:scale(1.03);
@@ -168,7 +170,6 @@ button{
     transform: translate(-50%, -50%); 
     padding: 5%;
     text-align: center;
-    display:none;
 }
 .ObjetoInvisible{
     opacity: 0%;
@@ -178,4 +179,8 @@ button{
     width: 12.3vw;
     height: 25.1vh;
     margin: 1.5vw;
+}
+/*Class List*/
+.oculto {
+  display: none;
 }

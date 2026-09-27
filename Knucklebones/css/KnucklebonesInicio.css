@@ -23,7 +23,6 @@ noscript{
 }
 /*Boton Música*/
 #BotonMusica{
-  background-image: url(../Assets/img/MusicNo.png);
   background-repeat: no-repeat;
 	background-size: cover;
   background-position: center; 
@@ -37,6 +36,9 @@ noscript{
   bottom: 5vh;
   right: 1vh; 
   z-index: 2; 
+}
+.botonMusicaFondo{
+  background-image: url(../Assets/img/MusicNo.png);
 }
 #BotonMusica:hover{
   transform:scale(1.03);

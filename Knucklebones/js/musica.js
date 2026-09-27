@@ -13,12 +13,14 @@ function controlMusica(botonId) {
    if(musicOn){
         musicaFondo.play();
         musicOn=false;
-        fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/Music.png')";
+        fondoBotonMusica.classList.add("botonMusica-on");
+        fondoBotonMusica.classList.remove("botonMusica-off");
     }
     else{
          musicaFondo.pause();
          musicOn=true;
-        fondoBotonMusica.style.backgroundImage = "url('../Knucklebones/Assets/img/MusicNo.png')";
+        fondoBotonMusica.classList.remove("botonMusica-on");
+        fondoBotonMusica.classList.add("botonMusica-off");
     }
 }
 

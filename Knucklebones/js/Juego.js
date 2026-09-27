@@ -48,8 +48,7 @@ function mostrarPuntuacion(num){
 function ganador(){
     const jugadorGanador = document.getElementById("selectorGanador");
     const contenedor = document.getElementById("contenedorGanador");
-    contenedor.style.display="block";
-    
+    contenedor.classList.remove("oculto");
     if(puntuacionA<puntuacionB){
         jugadorGanador.textContent = "Ha ganado el jugador B";
     }

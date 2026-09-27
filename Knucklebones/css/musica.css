@@ -1,0 +1,6 @@
+.botonMusica-on {
+  background-image: url('../Assets/img/Music.png');
+}
+.botonMusica-off {
+  background-image: url('../Assets/img/MusicNo.png');
+}
