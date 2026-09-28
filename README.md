@@ -4,11 +4,25 @@ Trabajo realizado por Adriana Remiro Autric.
 Qué partes hiciste con IA y con qué herramienta, 1-2 prompts reales relevantes, 
 cómo verificaste lo generado y qué escribiste a mano. Si no usaste IA, dilo y listo.
 
+Usé Ecosia AI y geminai como apoyo de programación.
+
 Uso principal para control de errores o dudas, ahora abajo muestro para que lo usé más aparte de 
 por estas razones:
+
 //1.
+Await y promise.
+No puedo poner un solo promp porque fue una conversación muy larga, pero en resumidas cuentas.
+Estaba trabajando solo en la consola para crear la lógica de los tablero y todo iba perfectamente hasta que
+llegó la parte de insertar los valores en la columna, cree event listeners para que vieran cuando le daba click.
+Pero por alguna razón no me llegaban a funcionar del todo, se los pasaba la lógica de la partida.
+Estuve preguntando a la IA y comenzó a hablarme de cosas que no tenían mucho que ver con lo que estba haciendo en el momento. Tras mucho debatir me acabó hablando del await y del promise como forma de que el programa se "parase"
+cuando llegara a esa parte y que no se pasase.
+Así que al final lo adopté y lo utilicé.
 
 //2.
+Generar el tablero de forma dinámica.
+Le pedi a la IA ""Ayudame a entender como crear el tablero de forma dinámica" y le pasé cómo
+había hecho los tableros en el html, lo que más temía era confundirme haciendo las etiquetas entonces quería ver si había entendido correctamente las páginas web que había visto. Porque inicialmente no me funcionaba
 
 ///////////////////
 «Autopsia»:
@@ -27,7 +41,7 @@ Que era algo más sencillo (a mi parecer)
 Quería hacer que el tablero fuera seleccionable, es decir que los jugadores pudieran elegir el tamaño
 del que querían el tablero. Pero al final me pareció algo más tedioso y además chocaba bastante con la 
 visión que tenía para cómo se vería de forma visual el juego, porque cómo tengo dos personajes que reaccionan 
-a lo que pasa con cada tablero si los hacía más grandes o pequeños quedaba feo.
+a lo que pasa con cada tablero si los hacía más grandes o pequeños quedaba feo. Ahora se puede cambiar pero no por la parte de la página web de forma obvia tienes que pulsar la tecla +, para que te salga un alert al que le metes el tamaño de la tabla
 
 ///////////////////
 Extra:
@@ -76,6 +90,7 @@ https://developer.mozilla.org/es/docs/Web/API/Window/setInterval
 https://developer.mozilla.org/es/docs/Web/API/Window/setTimeout
 https://www.luisllamas.es/en/insert-and-remove-elements-from-the-dom-javascript/
 https://developer.mozilla.org/es/docs/Web/API/Element/classList
+https://es.javascript.info/alert-prompt-confirm
 
 Assets:
 Algunos creados/editados por mi:

@@ -1,6 +1,6 @@
 //Variables de la tabla
     //Tablero
-    const tamTablero = 3;
+    let tamTablero = 3;
     let jugador; 
     let puntuacionA=0;
     let puntuacionB=0;
@@ -270,6 +270,19 @@ async function partida(){ //Asyc para que funcione el await
         partidaAcabada = condicionFinPartida(tableros[Number(jugador)]);       
     }
 }
+//////////////////////////////////////////////////////////////////////////////////
+//Teclas especiales
+document.addEventListener("keydown", (event) => {
+    if (event.key === "+") {
+        let nuevoTamano = prompt("Tamaño del tablero", 3);
+
+        if (nuevoTamano !== null && /^[0-9]+$/.test(nuevoTamano)) { //Solo números ( / -> Delimitadores de la expresión regular.||^ : Inicio de la cadena ||[0-9] : Cualquier dígito del 0 al 9 || $ : Final de la cadena. Asegura que no haya nada después del dígito.)
+            tamTablero = parseInt(nuevoTamano);
+            partida();
+        }
+    }
+});
+
 /////////////////////////////////////////////////////
 //Reacciones de los personajes
     //Volver al idle
@@ -303,18 +316,11 @@ const reiniciar = document.getElementById("reiniciarPagina");
         location.reload(); 
     });
 /////////////////////////////////////////////////////
-//Sleep
-function sleep(milisegundos) {
-    return new Promise(resolve=>
-        setTimeout(resolve, milisegundos));
-}
-/////////////////////////////////////////////////////
 //Sfx
-//Música backgorund
+    //Música backgorund
 import { inicializar } from './musica.js';//Exportamos de musica.js para usar las funciones
 const musicButton = document.getElementById("BotonMusica");
 inicializar("../Knucklebones/Assets/sfx/juego.mp3", musicButton);
-
     //Sonido Dado
 function sonidoDado(){
     const sonidoDado = new Audio("../Knucklebones/Assets/sfx/dado.mp3");
