@@ -272,6 +272,7 @@ async function partida(){ //Asyc para que funcione el await
 }
 //////////////////////////////////////////////////////////////////////////////////
 //Teclas especiales
+    //Añadir celdas
 document.addEventListener("keydown", (event) => {
     if (event.key === "+") {
         let nuevoTamano = prompt("Tamaño del tablero", 3);
@@ -282,7 +283,11 @@ document.addEventListener("keydown", (event) => {
         }
     }
 });
-
+document.addEventListener("keydown", (event) => {
+    if (event.key === "l") {
+        document.body.classList.toggle("light");
+    }
+});
 /////////////////////////////////////////////////////
 //Reacciones de los personajes
     //Volver al idle

@@ -72,6 +72,15 @@ for(let boton of botonHover){//A todos los botones
     });
 }
 ///////////////////////////////////////////////////////////////////////////////////
+//Teclas especiales
+    //Modo claro
+    //Teclas especiales
+document.addEventListener("keydown", (event) => {
+    if (event.key === "l") {
+        document.body.classList.toggle("light");
+    }
+});
+///////////////////////////////////////////////////////////////////////////////////
 // MAIN
 function main() {
     let tiempo = generarTiempoRandom();

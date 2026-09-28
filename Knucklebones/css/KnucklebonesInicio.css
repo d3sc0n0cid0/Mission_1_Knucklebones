@@ -234,3 +234,11 @@ button{
 .oculto {
   display: none;
 }
+
+/*Modo claro*/
+/*No quiero cambiar todo así que igual va a hacer daño a la vista lo siento mucho*/
+.light{
+  background-color: #a9a494;
+  color: black;
+  transition: background-color 1s;
+}
