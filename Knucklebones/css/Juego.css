@@ -107,11 +107,9 @@ button{
     align-items: center;
     justify-content: center;
 }
-#TableroA{
+.tablero{
     display: grid;
     grid-template-columns: auto auto auto;
-
-    background-image:  url("../Assets/img/TerciopeloRojo.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -123,21 +121,11 @@ button{
     align-items: center;
     justify-content: center;
 }
+#TableroA{
+    background-image:  url("../Assets/img/TerciopeloRojo.jpg");
+} 
 #TableroB{
-    display: grid;
-    grid-template-columns: auto auto auto;
-
     background-image:  url("../Assets/img/TerciopeloMorado.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    width: 20vw;
-    height: 20vh ;
-    margin: 3vh 3vw;
-
-    align-items: center;
-    justify-content: center;
 }
 .ColumnasT{
     margin: 1vh 1vw;

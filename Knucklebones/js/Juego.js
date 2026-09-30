@@ -338,7 +338,6 @@ function main() {
 window.onload = main; // Llamar a main cuando la página cargue
 
 /*
-Comentarioe extra yey
 Generar columna está basado en cómo estaba creado antes en el html  (lo dejo para verlo mejor)
                         <div data-columna="0" class="ColumnasT">
                             <div class="FilasT"><p>&nbsp</p></div>
