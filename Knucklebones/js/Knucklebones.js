@@ -55,7 +55,7 @@ comenzarJuego.addEventListener("click",()=>{
 });
 ///////////////////////////////////////////////////////////////////////////////////
 //Lógica del sonido y de la música
-import { inicializar } from './musica.js';//Exportamos de musica.js para usar las funciones
+import { inicializar } from './CodigoDuplicado.js';//Exportamos de CodigoDuplicado.js para usar las funciones
 const musicButton = document.getElementById("BotonMusica");
 inicializar("../Knucklebones/Assets/sfx/inicio.mp3", musicButton);
     //Pulsar botón Sonido
@@ -74,12 +74,8 @@ for(let boton of botonHover){//A todos los botones
 ///////////////////////////////////////////////////////////////////////////////////
 //Teclas especiales
     //Modo claro
-    //Teclas especiales
-document.addEventListener("keydown", (event) => {
-    if (event.key === "l") {
-        documentbody.classList.toggle("light");
-    }
-});
+    import {modoClaro} from './CodigoDuplicado.js';
+    modoClaro(); 
 ///////////////////////////////////////////////////////////////////////////////////
 // MAIN
 function main() {

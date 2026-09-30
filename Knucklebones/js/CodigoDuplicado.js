@@ -1,3 +1,4 @@
+//MÚSICA
 let musicaFondo = null; //Le paso que música quiero desde los otros java scripts porque cambia
 let musicOn = true;
 let fondoBotonMusica = null; //Le pasaré el id del botonMusica 
@@ -28,5 +29,15 @@ export function inicializar(ruta, botonId){ //Y ahora esta función es para mont
     cargarMusica(ruta);
     botonId.addEventListener("click", () => {
         controlMusica("BotonMusica"); 
+    });
+}
+
+
+//MODO OSCURO
+export function modoClaro (){
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "l") {
+            document.body.classList.toggle("light");
+        }
     });
 }

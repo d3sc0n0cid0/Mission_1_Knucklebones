@@ -31,9 +31,9 @@ function generarTableroDOM(tablero) {
 ///////////////////////////////////////////////////////////////////////////////////
 //Lógica para mostrar el apartado visual
     //Sustituir el grid por la matriz
-function actualizarGridDesdeMatriz(tableroDigital) {
+function actualizarGridDesdeMatriz(tableroDigital, esJugador) {
     let tableroVisual; //Con tablero visual me refuero a lo que se ve en pantalla y no a la lógica del propio tablero
-    if (jugador === false) {tableroVisual = document.getElementById("TableroA");} //Turno jugador A
+    if (esJugador === false) {tableroVisual = document.getElementById("TableroA");} //Turno jugador A
     else {tableroVisual = document.getElementById("TableroB");} //Turno jugador B
 
     let columnas = tableroVisual.querySelectorAll(".ColumnasT");
@@ -62,9 +62,9 @@ function turnoDe(){
     else{turno.textContent = "Turno de jugador B";}
 }
     //Mostrar puntuación, muestra la puntuación de cada jugador
-function mostrarPuntuacion(num){
+function mostrarPuntuacion(num, esJugador){
     let puntuacion;
-    if (jugador === false) { puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
+    if (esJugador === false) { puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
     else { puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
     puntuacion.textContent = `Puntuación: ${num}`; 
 }
@@ -86,14 +86,14 @@ function ganador(){
 ///////////////////////////////////////////////////////////////////////////////////
 //Lógica práctica del juego, es decir el cómo funciona en si 
     //Generar el array de los tableros
-function crearTablero(tablero){
+function crearTablero(tablero, esJugador){
     for(let i=0;i<tamTablero;i++){
         tablero[i]=[];
         for(let j=0;j<tamTablero;j++){
             tablero[i][j]=0;
         }
     }
-    actualizarGridDesdeMatriz(tablero)
+    actualizarGridDesdeMatriz(tablero, esJugador)
     return tablero;
 }
     //Genera el número aleatorio del dado (1-6)
@@ -132,25 +132,24 @@ function selecColumna() {
     });
 }
     //Colocar el número del dado en la columna seleccionada
-function insertarDadoColumna(dado, columna, tablero){
+function insertarDadoColumna(dado, columna, tablero, esJugador){
     for(let j=tamTablero-1;j>=0;j--){
         if(tablero[j][columna]===0){
             tablero[j][columna]=dado;
-            actualizarGridDesdeMatriz(tablero) //Ha entrado el dado
+            actualizarGridDesdeMatriz(tablero, esJugador) //Ha entrado el dado
             return true;
         }
     }
-    actualizarGridDesdeMatriz(tablero)
     return false; //Columna llena, por tanto no es válida esta columna
 }
     //Comprobarción con el tablero contrario
-function comprobarTableros(dado, columna, tablero){
+function comprobarTableros(dado, columna, tablero, esJugadorRival){
     //Comprobar si tiene ese número en la columna
     //Quitar dichos números
     for(let i=0;i<tamTablero;i++){
         if(tablero[i][columna]===dado){ //Tiene ese numero, se borra
             tablero[i][columna]=0;
-            perderDados();
+            perderDados(esJugadorRival);
         }
     }
     //Llamar a a bajar para que baje si a quedado algún 0 
@@ -159,9 +158,7 @@ function comprobarTableros(dado, columna, tablero){
             tablero[i][columna] = bajarNum(i, columna, tablero);
         }
     }
-    jugador=!jugador;
-    actualizarGridDesdeMatriz(tablero);
-    jugador=!jugador;
+    actualizarGridDesdeMatriz(tablero, esJugadorRival);
 }
     //Bajar los número si queda un 0 de por medio
 function bajarNum(pos, columna, tablero){
@@ -179,7 +176,7 @@ function bajarNum(pos, columna, tablero){
     }
 }
     //Calculadora de la puntuación
-function calcPuntuacion(tablero){
+function calcPuntuacion(tablero, esJugador){
     let puntuacionTotal = 0;
     let puntuacionColumna = 0;
     let filaArray = (Array(7).fill(0));//Un array unidimensional de (0-6)
@@ -206,7 +203,7 @@ function calcPuntuacion(tablero){
         puntuacionColumna=0;
         filaArray =(Array(7).fill(0));//Reinicio a 0 para la siguiente columna
     }
-    mostrarPuntuacion(puntuacionTotal);
+    mostrarPuntuacion(puntuacionTotal, esJugador);
 }
     //Condicion de fin de partida: El tablero A o B está lleno
 function condicionFinPartida(tablero){
@@ -227,7 +224,7 @@ async function partida(){ //Asyc para que funcione el await
     generarTableroDOM("TableroA");
     generarTableroDOM("TableroB");
 
-    jugador = false; //True 1 false 0
+    jugador = true; //True 1 false 0
     let dado;
     let columna;
 
@@ -237,9 +234,8 @@ async function partida(){ //Asyc para que funcione el await
     let tableroA = [];
     let tableroB = [];
 
-    crearTablero(tableroA);
-    jugador=true;
-    crearTablero(tableroB);
+    crearTablero(tableroA, false);
+    crearTablero(tableroB, true);
 
     const tableros = [tableroA, tableroB];
     //Inicio de partida
@@ -254,17 +250,15 @@ async function partida(){ //Asyc para que funcione el await
             //Colocar Dado
         do{
             columna = await selecColumna();
-            columnaLlena = insertarDadoColumna(dado, columna, tableros[Number(jugador)]) //Me daba error si no cambiaba a un number
+            columnaLlena = insertarDadoColumna(dado, columna, tableros[Number(jugador)], jugador) //Me daba error si no cambiaba a un number
         }while(columnaLlena===false);//Hasta que no o colo que en una columna con hueco no acaba
         
         //Comprobación con el tablero del contrario
-        comprobarTableros(dado, columna,tableros[Number(!jugador)]);//Comprobamos el tablero del rival para eliminar duplicados
+        comprobarTableros(dado, columna,tableros[Number(!jugador)], !jugador);//Comprobamos el tablero del rival para eliminar duplicados
 
         //Calculamos la puntuación de ambos tableros
-            jugador=!jugador;//Calculo el contrario
-            calcPuntuacion(tableros[Number(jugador)]);
-            jugador=!jugador;//Calculo el mío
-            calcPuntuacion(tableros[Number(jugador)]);
+            calcPuntuacion(tableroA, false);//A
+            calcPuntuacion(tableroB, true);//B
 
         //Comprobamos si se ha acabado la partida, si acaba saltar a mensaje de victoria 
         partidaAcabada = condicionFinPartida(tableros[Number(jugador)]);       
@@ -283,11 +277,10 @@ document.addEventListener("keydown", (event) => {
         }
     }
 });
-document.addEventListener("keydown", (event) => {
-    if (event.key === "l") {
-        document.body.classList.toggle("light");
-    }
-});
+    //Modo oscuro 
+    import {modoClaro} from './CodigoDuplicado.js';
+    modoClaro(); 
+
 /////////////////////////////////////////////////////
 //Reacciones de los personajes
     //Volver al idle
@@ -298,20 +291,19 @@ function volverIdle(){
     cabra.src = "../Knucklebones/Assets/img/cabra_idle.gif";
 }
     //Perder dados
-    function perderDados(){
-    jugador=!jugador;//Porque le quitas al contrario
+function perderDados(jugadorAfectado){ //Recibe quien pierde los dados
     let cordero = document.getElementById("PersonajeA");
     let cabra = document.getElementById("PersonajeB");
-    if(jugador===false){//Cordero
+    
+    if(jugadorAfectado === false){ // Le quitamos dados al jugadorA
         cordero.src = "../Knucklebones/Assets/img/cordero_enfadado.gif";
-        cabra.src = "../Knucklebones/Assets/img/cabra_feliz.gif"
+        cabra.src = "../Knucklebones/Assets/img/cabra_feliz.gif";
     }
-    else{//Cabra
+    else{ // Le quitamos dados al jugadorB
         cabra.src = "../Knucklebones/Assets/img/cabra_enfadado.gif";
         cordero.src = "../Knucklebones/Assets/img/cordero_feliz.gif";
     }
-    jugador=!jugador;
-    setTimeout(()=>{volverIdle();},2400);//Espera el tiempo puesto y vuelve a idle
+    setTimeout(() => { volverIdle(); }, 2400);//Espera el tiempo puesto y vuelve a idle
 }
 ///////////////////////////////////////////////////////////////////////////////////
 //Reinicio de la partida
@@ -323,7 +315,7 @@ const reiniciar = document.getElementById("reiniciarPagina");
 /////////////////////////////////////////////////////
 //Sfx
     //Música backgorund
-import { inicializar } from './musica.js';//Exportamos de musica.js para usar las funciones
+import { inicializar } from './CodigoDuplicado.js';//Exportamos de codigoduplicado.js para usar las funciones
 const musicButton = document.getElementById("BotonMusica");
 inicializar("../Knucklebones/Assets/sfx/juego.mp3", musicButton);
     //Sonido Dado

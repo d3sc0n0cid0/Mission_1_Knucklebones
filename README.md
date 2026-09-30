@@ -1,6 +1,34 @@
+# Despertar del DOM
 Trabajo realizado por Adriana Remiro Autric.
+## Descripción
+Despertar del DOM es un menú y el juego del Knucklebones.
 
-«Uso de IA»: 
+El cual consta de ganar a tu adversario en número de puntos apartir de haciendo columnas de dados 
+multiplicamdo su valor y eliminando los dados enemigos. Al acabar se calcula las puntuaciones
+
+## Cómo ejecutar el proyecto
+
+1. Clonar o descargar el repositorio.
+2. Abrir la carpeta del proyecto.
+3. Abrir `Knucklebones.html` en un navegador.
+4. Pulsar `Jugar` para comenzar una partida.
+
+No es necesario instalar ninguna dependencia.
+
+## Funcionamiento
+
+- El tablero 3x3 se genera dinámicamente mediante JavaScript, puede cambiarse su tamaño pulsando 
+la tecla "+" una vez comienza la partida.
+- En cada ronda se tira un dado del cual sale un valor aleatorio entre 1 y 6.
+- El jugador debe colocar el dado en una columna libre para finalizar su turno.
+- Si en la misma columa esté el mismo dado el valor de este se elevará al número de repeticiones
+correspondiente. A su vez si colocas un dado en una columna donde el contarrio tenga colocado un dado eliminarás todas las instancias del ese dado en el tablero contrario.
+- Al finalizar cada turno se calcula el número de puntos de cada jugador y finalmente
+gana el que obtenga una puntuación mayor.
+- Pulsando la tecla `L` se activa o desactiva el modo oscuro.
+
+
+## Uso de IA
 Qué partes hiciste con IA y con qué herramienta, 1-2 prompts reales relevantes, 
 cómo verificaste lo generado y qué escribiste a mano. Si no usaste IA, dilo y listo.
 
@@ -25,9 +53,9 @@ Le pedi a la IA ""Ayudame a entender como crear el tablero de forma dinámica" y
 había hecho los tableros en el html, lo que más temía era confundirme haciendo las etiquetas entonces quería ver si había entendido correctamente las páginas web que había visto. Porque inicialmente no me funcionaba
 
 ///////////////////
-«Autopsia»:
+## Autopsia
 Las 2 decisiones más discutibles de tu código y qué alternativa descartaste en cada una.
-//1.
+### 1.
 Quería hacer que en alguna perte de la página hubiera un texto que se moviera, entonces
 investigando encontré que existía "Marquee", que era justo lo que quería, pero era un lenguaje
 obsoleto pero que aún funcionaba auqnue podían quitarlo en cualquier momento.
@@ -37,18 +65,15 @@ y así no tener que descubrir un día que ya no funcionaba.
 Lamentablemente para mi no acabé logrando que funcionara como yo quería, debido a que el texto
 se quedaba pillado, así que decidí usar keyframes cómo si se tratase de una imagen.
 Que era algo más sencillo (a mi parecer)
-//2. 
+### 2. 
 Quería hacer que el tablero fuera seleccionable, es decir que los jugadores pudieran elegir el tamaño
 del que querían el tablero. Pero al final me pareció algo más tedioso y además chocaba bastante con la 
 visión que tenía para cómo se vería de forma visual el juego, porque cómo tengo dos personajes que reaccionan 
 a lo que pasa con cada tablero si los hacía más grandes o pequeños quedaba feo. Ahora se puede cambiar pero no por la parte de la página web de forma obvia tienes que pulsar la tecla +, para que te salga un alert al que le metes el tamaño de la tabla
 
-///////////////////
-Extra:
-Páginas web de donde he sacado información:
+## Extra, páginas web de donde he sacado imágenes/Assets:
 
-Páginas web de donde he sacado imágenes/Assets:
-    Información:
+### Información
     Uso de apuntes de primero de la carrera
 https://developer.mozilla.org/es/docs/Learn_web_development
 https://es.stackoverflow.com/
@@ -92,7 +117,7 @@ https://www.luisllamas.es/en/insert-and-remove-elements-from-the-dom-javascript/
 https://developer.mozilla.org/es/docs/Web/API/Element/classList
 https://es.javascript.info/alert-prompt-confirm
 
-Assets:
+### Assets:
 Algunos creados/editados por mi:
 
 https://www.dafont.com/es/triforce.font?text=cult+of+the+lamb
