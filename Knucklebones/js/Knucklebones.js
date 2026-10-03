@@ -45,7 +45,7 @@ salir.addEventListener("click", () => {
     }
 });
     //Mostrar tutorial
-const botonTutorial = document.getElementById("botonTutotial");
+const botonTutorial = document.getElementById("botonTutorial");
 const tutorial = document.getElementById("tutorial");
 botonTutorial.addEventListener("click", () => {
     pulsarBoton();

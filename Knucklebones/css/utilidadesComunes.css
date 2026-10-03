@@ -1,11 +1,31 @@
-.botonMusica-on {
-  background-image: url('../Assets/img/Music.png');
+* {
+    cursor: url(../Assets/img/cursor.png), auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
-.botonMusica-off {
-  background-image: url('../Assets/img/MusicNo.png');
+/*Modo claro*/
+.oculto {
+    display: none;
+}
+/*No quiero cambiar todo así que igual va a hacer daño a la vista lo siento mucho*/
+.light{
+  background-color: #a9a494;
+  background-image: none;
+  color: black;
+  transition: background-color 1s;
+}
+.light header,.light nav,.light section,.light #subTexto {
+    color: #2b261f;
+}
+.light .jugador {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /*Música*/
+.botonMusicaFondo{
+  background-image: url(../Assets/img/MusicNo.png);
+}
 #BotonMusica{
     background-repeat: no-repeat;
     background-size: cover;
@@ -21,7 +41,13 @@
     right: 1vh; 
     z-index: 2; 
 }
-
 #BotonMusica:hover{
   transform:scale(1.03);
 }
+.botonMusica-on {
+  background-image: url('../Assets/img/Music.png');
+}
+.botonMusica-off {
+  background-image: url('../Assets/img/MusicNo.png');
+}
+

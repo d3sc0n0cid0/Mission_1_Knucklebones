@@ -1,9 +1,3 @@
-*{
-  cursor: url(../Assets/img/cursor.png), auto;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
 html {
   height: 100%;
   width: 100%;
@@ -21,11 +15,6 @@ noscript{
   outline: auto;
   outline-color: rebeccapurple;
 }
-/*Boton Música*/
-.botonMusicaFondo{
-  background-image: url(../Assets/img/MusicNo.png);
-}
-
 body{
 	text-align:center;
   font-family: "Piazzolla", serif;
@@ -39,7 +28,7 @@ header{
   margin-top: -6%;
   margin-bottom: -10%;
 }
-#Title_Bracket{
+.Title_Bracket{
   padding: 1vw;
 }
 .TituloPrincipal{
@@ -210,17 +199,4 @@ button{
 .textoTutorial{
   font-size: 1.4em;
   line-height: 1.4;
-}
-
-/*Class list*/
-.oculto {
-  display: none;
-}
-
-/*Modo claro*/
-/*No quiero cambiar todo así que igual va a hacer daño a la vista lo siento mucho*/
-.light{
-  background-color: #a9a494;
-  color: black;
-  transition: background-color 1s;
 }

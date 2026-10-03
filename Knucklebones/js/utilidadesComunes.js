@@ -32,7 +32,7 @@ function inicializar(ruta, botonId){ //Y ahora esta función es para montar todo
     });
 }
 
-//MODO OSCURO
+//Modo claro
 function modoClaro (){
     document.addEventListener("keydown", (event) => {
         if (event.key.toLowerCase() === "l") {//Acepta mayúsculas y minúsuclas

@@ -1,8 +1,19 @@
 //importar de CódigoDuplicado
 import { arrancarPagina } from './utilidadesComunes.js';
+// Rutas
+const RUTAS = {
+    AUDIO_DADO: "Assets/sfx/dado.mp3",
+    AUDIO_JUEGO: "Assets/sfx/juego.mp3",
+    CORDERO_IDLE: "Assets/img/cordero_idle.gif",
+    CORDERO_ENFADADO: "Assets/img/cordero_enfadado.gif",
+    CORDERO_FELIZ: "Assets/img/cordero_feliz.gif",
+    CABRA_IDLE: "Assets/img/cabra_idle.gif",
+    CABRA_ENFADADO: "Assets/img/cabra_enfadado.gif",
+    CABRA_FELIZ: "Assets/img/cabra_feliz.gif"
+};
 //Variables de la tabla
     //Tablero
-    let tamTablero = parseInt(sessionStorage.getItem("tamTablero")) || 3; // Si hay un valor guardado en sessionStorage usamos ese, si no, 3 por defecto
+    let tamTablero = parseInt(sessionStorage.getItem("tamTablero"),10) || 3; // Si hay un valor guardado en sessionStorage usamos ese, si no, 3 por defecto
     let jugador; 
     let rival;
     let puntuacionA = 0;//Valores digitales, más abajo elPuntuaciónA/B es para la parte visual
@@ -126,18 +137,18 @@ function generarTirada() {
     return numDado;
 }
     //Selector de columna
-function selecColumna() {
+// Selector de columna filtrado por el tablero del jugador activo
+function selecColumna(tablero) {
     return new Promise((resolve) => {
-        const columnas = document.getElementsByClassName("ColumnasT");
+        const contenedor = document.getElementById(tablero);
+        const columnas = contenedor.getElementsByClassName("ColumnasT");
         const columnasArray = Array.from(columnas); // Convertir HTMLCollection a array
-
+        
         // Función para manejar el clic en una columna
         const handleClick = (event) => {
             const columnaElement = event.currentTarget;
-            let numColumStr = columnaElement.getAttribute('data-columna');
-
-            let numColum = parseInt(numColumStr);
-
+            const numColumStr = columnaElement.getAttribute('data-columna');
+            let numColum = parseInt(columnaElement.getAttribute("data-columna"), 10);//El 10 es para evitar operaciones parseInt redunantes sobre variables que son de tipo Number
             // Resolver la promesa con la columna seleccionada
             resolve(numColum);
 
@@ -146,7 +157,6 @@ function selecColumna() {
                 col.removeEventListener('click', handleClick);
             });
         };
-
         // Añadir el evento de clic a cada columna
         columnasArray.forEach(col => {
             col.addEventListener('click', handleClick);
@@ -209,7 +219,7 @@ function calcPuntuacion(tablero, esJugador){
         //Ahora confirmamos si ese valor no ha estado antes es decir, si es igual a un número que ya ha aparecido en 
         //La columna, se multiplica por el número de veces que ha aparecido (2,2,2->8)
         for(let i=1;i<=6;i++){//Pasamos por cada número
-            if (filaArray[i] > 1 && i!=1) { //Hacemos una elevación excepto si es uno porque eso lo vamos a sumar porque si no da [1,1,1] = 1 y no tendrías ventaja así que mejor [1,1,1]=3
+            if (filaArray[i] > 1 && i!==1) { //Hacemos una elevación excepto si es uno porque eso lo vamos a sumar porque si no da [1,1,1] = 1 y no tendrías ventaja así que mejor [1,1,1]=3
                 puntuacionColumna += Math.pow(i, filaArray[i]); //Elevamos 
             } else if (filaArray[i] === 1 && i!=1) { // Sumamos el valor base si 
                 puntuacionColumna += i;
@@ -223,7 +233,7 @@ function calcPuntuacion(tablero, esJugador){
         puntuacionColumna=0;
         filaArray =(Array(7).fill(0));//Reinicio a 0 para la siguiente columna
     }
-    mostrarPuntuacion(puntuacionTotal, esJugador);
+    return puntuacionTotal
 }
     //Condicion de fin de partida: El tablero A o B está lleno
 function condicionFinPartida(tablero){
@@ -234,7 +244,6 @@ function condicionFinPartida(tablero){
            }
         }
     }
-    ganador();
     return true;
 }
     //Cambio de jugador
@@ -262,6 +271,7 @@ async function partida(){ //Asyc para que funcione el await
 
     let tableroA = [];
     let tableroB = [];
+    let idTableroActivo;
 
     crearTablero(tableroA, 0);
     crearTablero(tableroB, 1);
@@ -276,18 +286,24 @@ async function partida(){ //Asyc para que funcione el await
         //El jugador coloca el dado que le ha tocado
             //Dado que le toca
         dado = generarTirada();
-            //Colocar Dado
-        do{
-            columna = await selecColumna();
-            insertadoConExito = insertarDadoColumna(dado, columna, tableros[jugador]) //Me daba error si no cambiaba a un number
-        }while(insertadoConExito===false);//Hasta que no o colo que en una columna con hueco no acaba
+            //Seleccionar Tablero activo para el select columna
+        if(jugador==0){idTableroActivo="TableroA";}
+        else{idTableroActivo="TableroB";}
+
+        //Colocar Dado
+        do {
+            columna = await selecColumna(idTableroActivo);
+            insertadoConExito = insertarDadoColumna(dado, columna, tableros[jugador]);
+        } while (insertadoConExito === false);//Hasta que no se coloca el dado en una columna con hueco no acaba
         
         //Comprobación con el tablero del contrario
         comprobarTableros(dado, columna,tableros[rival], rival);//Comprobamos el tablero del rival para eliminar duplicados
 
         //Calculamos la puntuación de ambos tableros
             calcPuntuacion(tableroA, 0);//A
+            mostrarPuntuacion(puntuacionA, 0);
             calcPuntuacion(tableroB, 1);//B
+            mostrarPuntuacion(puntuacionB, 1);
 
         //Actualizamos el array completo :D
             actualizarGridDesdeMatriz(tableros[jugador],jugador);
@@ -295,27 +311,28 @@ async function partida(){ //Asyc para que funcione el await
             
         //Comprobamos si se ha acabado la partida, si acaba saltar a mensaje de victoria 
         partidaAcabada = condicionFinPartida(tableroA) || condicionFinPartida(tableroB); //Aunque tecnicamente solo ahce falta comprobar el acutal el webi arena me salta error si no lo pongo así   
+        if(partidaAcabada){ganador();}
     }
 }
 //////////////////////////////////////////////////////////////////////////////////
 //Teclas especiales
     //Añadir celdas
-document.addEventListener("keydown", (event) => {
-    if (event.key === "+") {
-        let nuevoTamano = prompt("Tamaño del tablero (2-9)", tamTablero);
-        let tamParsed = parseInt(nuevoTamano);
 
-        if (nuevoTamano !== null && /^[0-9]+$/.test(nuevoTamano)) { 
-            if (tamParsed > 1 && tamParsed <10) { //Si pones un tamaño muy grande explota un poco
+// Añadir celdas / Redimensionar tablero
+document.addEventListener("keydown", (event) => {
+    if (event.key === "+" || event.code === "NumpadAdd") { // Cubre teclado estándar y numérico
+        let nuevoTamano = prompt("Tamaño del tablero (2-9)", tamTablero);
+
+        if (nuevoTamano !== null) { 
+            let tamParsed = parseInt(nuevoTamano, 10);
+
+            if (!isNaN(tamParsed) && tamParsed >= 2 && tamParsed <= 9) { //Si pones un tamaño muy grande explota un poco
                 if (confirm(`¿Quieres reiniciar la partida con un tablero de ${tamParsed}x${tamParsed}?`)) {
-                // Guardamos el tamaño con la clave "tamTablero" entre comillas
                     sessionStorage.setItem("tamTablero", tamParsed); 
-                    // Reiniciamos la página de forma limpia
                     location.reload();
                 }
-                else {
+            } else {
                 alert("Por favor, introduce un tamaño válido entre 2 y 9.");
-                }
             }
         }
     }
@@ -324,17 +341,17 @@ document.addEventListener("keydown", (event) => {
 //Reacciones de los personajes
     //Volver al idle
 function volverIdle(){
-    PersonajeA.src = "Assets/img/cordero_idle.gif";
-    PersonajeB.src = "Assets/img/cabra_idle.gif";
+    PersonajeA.src = RUTAS.CORDERO_IDLE;
+    PersonajeB.src = RUTAS.CABRA_IDLE;
 }
     //Perder dados
 function perderDados(jugadorAfectado){ 
-    if (jugadorAfectado === 0) { 
-        PersonajeA.src = "Assets/img/cordero_enfadado.gif";
-        PersonajeB.src = "Assets/img/cabra_feliz.gif";
-    } else { 
-        PersonajeB.src = "Assets/img/cabra_enfadado.gif";
-        PersonajeA.src = "Assets/img/cordero_feliz.gif";
+    if (jugadorAfectado === 0) { //Le quitas dado a cordero
+        PersonajeA.src = RUTAS.CORDERO_ENFADADO;
+        PersonajeB.src = RUTAS.CABRA_FELIZ;
+    } else { //Le quitas dado a cabra
+        PersonajeB.src = RUTAS.CABRA_ENFADADO
+        PersonajeA.src = RUTAS.CORDERO_FELIZ;
     }
     setTimeout(() => { volverIdle(); }, 2400);
 }
@@ -349,29 +366,10 @@ const reiniciar = document.getElementById("reiniciarPagina");
 //Sfx
     //Sonido Dado
 function sonidoDado(){
-    const sonidoDado = new Audio("Assets/sfx/dado.mp3");
+    const sonidoDado = new Audio(RUTAS.AUDIO_DADO);
     sonidoDado.play();
 }
 /////////////////////////////////////////////////////
 //Inicialización de las funciones de código duplicado
     //Música fondo + modo claro + partida
-arrancarPagina("Assets/sfx/juego.mp3", partida);
-
-/*
-Generar columna está basado en cómo estaba creado antes en el html  (lo dejo para verlo mejor)
-                        <div data-columna="0" class="ColumnasT">
-                            <div class="FilasT"><p>&nbsp</p></div>
-                            <div class="FilasT"><p>&nbsp</p></div>
-                            <div class="FilasT"><p>&nbsp</p></div>
-                        </div>
-                        <div data-columna="1" class="ColumnasT">
-                            <div  class="FilasT"><p>&nbsp</p></div>
-                            <div class="FilasT"><p>&nbsp</p></div>
-                            <div class="FilasT"><p>&nbsp</p></div>
-                        </div>
-                        <div data-columna="2" class="ColumnasT">
-                            <div class="FilasT"><p>&nbsp</p></div>
-                            <div class="FilasT"><p>&nbsp</p></div>
-                            <div class="FilasT"><p>&nbsp</p></div>
-                        </div>
-*/
+arrancarPagina(RUTAS.AUDIO_JUEGO, partida);

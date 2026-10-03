@@ -8,10 +8,9 @@
     <!--defer: Para que se descargue en segundo plano el js y se ejecute tras se cargue el html-->
     <!--module porque estamos exportando e importando funciones-->
     <script defer type="module" src="js/Knucklebones.js"></script>
-    <script defer type="module" src="js/utilidadesComunes.js"></script>
     <!--Union con el css--> 
     <link href="css/KnucklebonesInicio.css" rel="stylesheet" type="text/css">
-    <link href="css/utilidadesComunes.css" rel="stylesheet" type="text/css">
+        <link href="css/utilidadesComunes.css" rel="stylesheet" type="text/css">
 
     <!--Vínculo de las fuentes de GoogleFonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,9 +30,9 @@
     <!--Separación-->
     <header>
         <div class="TituloPrincipal">
-            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+            <img class="Title_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
             <h1>KNUCLEBONES</h1>
-            <img id="Title_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+            <img class="Title_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
         </div>
     </header>
     <!--Separación-->
@@ -48,7 +47,7 @@
                 <button id="botonComenzarJuego" class="botonDecorado botonSound1">Jugar</button>
             </li>
             
-            <li><button id="botonTutotial" class="botonDecorado clickBoton">Cómo Jugar</button></li>
+            <li><button id="botonTutorial" class="botonDecorado clickBoton">Cómo Jugar</button></li>
                 <div id="tutorial" class="css_Tutorial oculto">
                     <div id="CajaTutorial">
                         <div id="cajaTituloTutorial_inicial">

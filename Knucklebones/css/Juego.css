@@ -1,9 +1,3 @@
-*{
-    cursor: url(../Assets/img/cursor.png), auto;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
 html {
     height: 100%;
     width: 100%;
@@ -16,25 +10,6 @@ html {
     background-color: black;
     justify-content: center;
     text-align: center;
-}
-
-/*Música*/
-
-.botonMusicaFondo{
-  background-image: url(../Assets/img/MusicNo.png);
-}
-
-/*Seleccionador de filas y columnas*/
-#filasYcolumnas{
-    display: flex;
-    flex-direction: row;
-    gap: 3vw;
-
-    color: #f2e9cd;
-    font-size: 1.02em;
-}
-#generar{
-    margin-top: 2vh;
 }
 /*Boton*/
 button{
@@ -135,16 +110,4 @@ button{
     width: 12.3vw;
     height: 25.1vh;
     margin: 1.5vw;
-}
-/*Class List*/
-.oculto {
-  display: none;
-}
-/*Modo claro*/
-/*No quiero cambiar todo así que igual va a hacer daño a la vista lo siento mucho*/
-.light{
-  background-color: #a9a494;
-  background-image: none;
-  color: black;
-  transition: background-color 1s;
 }
