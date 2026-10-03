@@ -25,19 +25,33 @@ function controlMusica(botonId) {
     }
 }
 
-export function inicializar(ruta, botonId){ //Y ahora esta función es para montar todo sin tener que crearlo fuera
+function inicializar(ruta, botonId){ //Y ahora esta función es para montar todo sin tener que crearlo fuera
     cargarMusica(ruta);
     botonId.addEventListener("click", () => {
         controlMusica("BotonMusica"); 
     });
 }
 
-
 //MODO OSCURO
-export function modoClaro (){
+function modoClaro (){
     document.addEventListener("keydown", (event) => {
         if (event.key === "l") {
             document.body.classList.toggle("light");
         }
     });
+}
+
+//Inicializar todo para no hacer varias llamadas en el amin
+export function arrancarPagina(rutaMusica, funcionMain) {
+    const musicButton = document.getElementById("BotonMusica");
+    if (musicButton) {
+        inicializar(rutaMusica, musicButton);
+    }
+    
+    modoClaro();
+
+    //Llamar una función desde el main
+    if (funcionMain) {
+        window.onload = funcionMain;
+    }
 }

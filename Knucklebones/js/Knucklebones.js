@@ -54,10 +54,6 @@ comenzarJuego.addEventListener("click",()=>{
 	 window.location.href = "../Knucklebones/Juego.html";//Abre la pestaña sobre si misma a la de juego
 });
 ///////////////////////////////////////////////////////////////////////////////////
-//Lógica del sonido y de la música
-import { inicializar } from './CodigoDuplicado.js';//Exportamos de CodigoDuplicado.js para usar las funciones
-const musicButton = document.getElementById("BotonMusica");
-inicializar("../Knucklebones/Assets/sfx/inicio.mp3", musicButton);
     //Pulsar botón Sonido
 function pulsarBoton() {	
     let tocarBoton = new Audio("../Knucklebones/Assets/sfx/pulsarBoton.mp3");
@@ -72,15 +68,13 @@ for(let boton of botonHover){//A todos los botones
     });
 }
 ///////////////////////////////////////////////////////////////////////////////////
-//Teclas especiales
-    //Modo claro
-    import {modoClaro} from './CodigoDuplicado.js';
-    modoClaro(); 
-///////////////////////////////////////////////////////////////////////////////////
-// MAIN
+//Inicialización de las funciones de código duplicado
+    //importar de CódigoDuplicado
+import { arrancarPagina } from './CodigoDuplicado.js';//Exportamos de CodigoDuplicado.js para usar las funciones
+
 function main() {
     let tiempo = generarTiempoRandom();
     setTimeout(cambioImagen, tiempo);
 }
-// Llamar a main cuando la página cargue
-window.onload = main;
+//Música fondo + modo claro + main
+arrancarPagina("../Knucklebones/Assets/sfx/inicio.mp3", main); setTimeout(cambioImagen, tiempo);

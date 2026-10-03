@@ -1,55 +1,60 @@
 //Variables de la tabla
     //Tablero
-    let tamTablero = 3;
+    let tamTablero = parseInt(sessionStorage.getItem("tamTablero")) || 3; // Si hay un valor guardado en sessionStorage usamos ese, si no, 3 por defecto
     let jugador; 
+    let rival;
     let puntuacionA=0;
     let puntuacionB=0;
+    // Caché de elementos HTML para no hacer querySelectorAll en cada jugada
+    let cacheMatrizA = [];
+    let cacheMatrizB = [];
 ///////////////////////////////////////////////////////////////////////////////////
-//Generación de tablero dinámico, se puede cambiar pero lo dejo en fijo 3x3 porque si no no me gusta como queda
-//Y porque tengo todo colocado con grid-template-columns y auto por lo qeu se quedarían medio raras, pero lógicamete funciona
-//Y si me lo piden lo puedo cambiar y funciona
+//Generación de tablero dinámico
 function generarTableroDOM(tablero) {
     const contenedorTablero = document.getElementById(tablero);
     contenedorTablero.innerHTML = "";
-    //Columnas
+    contenedorTablero.style.gridTemplateColumns = `repeat(${tamTablero}, auto)`; // Ajuste dinámico del grid CSS
+    // Matriz temporal para guardar las referencias a los <p>
+    let matrizCache = []; 
+    for (let f = 0; f < tamTablero; f++) {
+        matrizCache[f] = [];
+    }
+    // Columnas
     for (let col = 0; col < tamTablero; col++) {
         const columnaDiv = document.createElement("div"); //<div> que representará a la columna
-        columnaDiv.classList.add("ColumnasT"); // css "ColumnasT" para que mantenga los estilos
-        columnaDiv.setAttribute("data-columna", col); // Guardo el índice de la columna para cuando haga clic
-        //Filas de las columnas
+        columnaDiv.classList.add("ColumnasT"); //css "ColumnasT" para que mantenga los estilos
+        columnaDiv.setAttribute("data-columna", col); //Guardo el índice de la columna para cuando haga clic
+        // Filas de las columnas
         for (let fila = 0; fila < tamTablero; fila++) {
             const filaDiv = document.createElement("div"); //Para cada casilla individual
             filaDiv.classList.add("FilasT"); //css
-            const textoP = document.createElement("p"); //Contener Dado
+            const textoP = document.createElement("p"); //Contener dado
             textoP.textContent = "0";
+
+            matrizCache[fila][col] = textoP; // Guardamos la referencia directa al nodo <p>
+
             filaDiv.appendChild(textoP); //El texto va dentro de la casilla
             columnaDiv.appendChild(filaDiv); //Las filas van dentro de la columna
         }
-        contenedorTablero.appendChild(columnaDiv);
+        contenedorTablero.appendChild(columnaDiv);//Y todo va en el tablero
     }
+    // Asignamos la matriz de caché al tablero correspondiente
+    if (tablero === "TableroA") {cacheMatrizA = matrizCache;}
+    else {cacheMatrizB = matrizCache;}
 }
 ///////////////////////////////////////////////////////////////////////////////////
 //Lógica para mostrar el apartado visual
     //Sustituir el grid por la matriz
-function actualizarGridDesdeMatriz(tableroDigital, esJugador) {
-    let tableroVisual; //Con tablero visual me refuero a lo que se ve en pantalla y no a la lógica del propio tablero
-    if (esJugador === false) {tableroVisual = document.getElementById("TableroA");} //Turno jugador A
-    else {tableroVisual = document.getElementById("TableroB");} //Turno jugador B
-
-    let columnas = tableroVisual.querySelectorAll(".ColumnasT");
-
-    // Iterar sobre las filas
-    tableroDigital.forEach((filaDigital, indiceFila) => {
-        // Iterar sobre las columnas
-        filaDigital.forEach((valor, indiceColumna) => {
-            // Acceder a la columna y fila correctas en el HTML
-            let columnaHTML = columnas[indiceColumna];
-            let filasHTML = columnaHTML.querySelectorAll(".FilasT");
-            let filaHTML = filasHTML[indiceFila];
-
-            filaHTML.querySelector("p").textContent = valor;
-        });
-    });
+function actualizarGridDesdeMatriz(tablero, esJugador) {
+    //Modificación únicamente de las columnas
+    let cacheTablero;
+    if(esJugador===0){cacheTablero=cacheMatrizA;}//JugadorA
+    else{cacheTablero=cacheMatrizB;}//JugadorB
+    for(let fila=0;fila<tamTablero;fila++){
+        for(let columna=0;columna<tamTablero;columna++){
+            cacheTablero[fila][columna].textContent = tablero[fila][columna];
+        }
+    }        
 }
     //Sustituir dado en grid
 function sustituirDado(numDado){
@@ -58,13 +63,13 @@ function sustituirDado(numDado){
     //Selector de turno, muestra a quien le toca colocar
 function turnoDe(){
     const turno = document.getElementById("selectorTurno");
-    if(jugador===false){turno.textContent = "Turno de jugador A";}
+    if(jugador===0){turno.textContent = "Turno de jugador A";}
     else{turno.textContent = "Turno de jugador B";}
 }
     //Mostrar puntuación, muestra la puntuación de cada jugador
 function mostrarPuntuacion(num, esJugador){
     let puntuacion;
-    if (esJugador === false) { puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
+    if (esJugador === 0) { puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
     else { puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
     puntuacion.textContent = `Puntuación: ${num}`; 
 }
@@ -136,7 +141,6 @@ function insertarDadoColumna(dado, columna, tablero, esJugador){
     for(let j=tamTablero-1;j>=0;j--){
         if(tablero[j][columna]===0){
             tablero[j][columna]=dado;
-            actualizarGridDesdeMatriz(tablero, esJugador) //Ha entrado el dado
             return true;
         }
     }
@@ -158,7 +162,6 @@ function comprobarTableros(dado, columna, tablero, esJugadorRival){
             tablero[i][columna] = bajarNum(i, columna, tablero);
         }
     }
-    actualizarGridDesdeMatriz(tablero, esJugadorRival);
 }
     //Bajar los número si queda un 0 de por medio
 function bajarNum(pos, columna, tablero){
@@ -217,6 +220,11 @@ function condicionFinPartida(tablero){
     ganador();
     return true;
 }
+    //Cambio de jugador
+function CambioJugador(){
+    jugador = 1 - jugador;
+    rival = 1 - jugador;
+}
 ///////////////////////////////////////////////////////////////////////////////////
 //Partida
 async function partida(){ //Asyc para que funcione el await
@@ -224,24 +232,26 @@ async function partida(){ //Asyc para que funcione el await
     generarTableroDOM("TableroA");
     generarTableroDOM("TableroB");
 
-    jugador = true; //True 1 false 0
+    jugador = 1; // 0 jugador A 1 jugador 2
+    rival = 0;
+
     let dado;
     let columna;
 
     let partidaAcabada=false;
-    let columnaLlena=true;
+    let insertadoConExito=true;
 
     let tableroA = [];
     let tableroB = [];
 
-    crearTablero(tableroA, false);
-    crearTablero(tableroB, true);
+    crearTablero(tableroA, 0);
+    crearTablero(tableroB, 1);
 
     const tableros = [tableroA, tableroB];
     //Inicio de partida
     while(!partidaAcabada){//Hasta que no se llene uno de los tableros no acaba la partida
         //Cambio de turno al otro jugador
-        jugador= !jugador;
+        CambioJugador();
         turnoDe(); //Cambia el texto de a quien le toca
 
         //El jugador coloca el dado que le ha tocado
@@ -250,18 +260,22 @@ async function partida(){ //Asyc para que funcione el await
             //Colocar Dado
         do{
             columna = await selecColumna();
-            columnaLlena = insertarDadoColumna(dado, columna, tableros[Number(jugador)], jugador) //Me daba error si no cambiaba a un number
-        }while(columnaLlena===false);//Hasta que no o colo que en una columna con hueco no acaba
+            insertadoConExito = insertarDadoColumna(dado, columna, tableros[jugador], jugador) //Me daba error si no cambiaba a un number
+        }while(insertadoConExito===false);//Hasta que no o colo que en una columna con hueco no acaba
         
         //Comprobación con el tablero del contrario
-        comprobarTableros(dado, columna,tableros[Number(!jugador)], !jugador);//Comprobamos el tablero del rival para eliminar duplicados
+        comprobarTableros(dado, columna,tableros[rival], rival);//Comprobamos el tablero del rival para eliminar duplicados
 
         //Calculamos la puntuación de ambos tableros
-            calcPuntuacion(tableroA, false);//A
-            calcPuntuacion(tableroB, true);//B
+            calcPuntuacion(tableroA, 0);//A
+            calcPuntuacion(tableroB, 1);//B
 
+        //Actualizamos el array completo :D
+            actualizarGridDesdeMatriz(tableros[jugador],jugador);
+            actualizarGridDesdeMatriz(tableros[rival], rival);
+            
         //Comprobamos si se ha acabado la partida, si acaba saltar a mensaje de victoria 
-        partidaAcabada = condicionFinPartida(tableros[Number(jugador)]);       
+        partidaAcabada = condicionFinPartida(tableros[jugador]);       
     }
 }
 //////////////////////////////////////////////////////////////////////////////////
@@ -269,18 +283,19 @@ async function partida(){ //Asyc para que funcione el await
     //Añadir celdas
 document.addEventListener("keydown", (event) => {
     if (event.key === "+") {
-        let nuevoTamano = prompt("Tamaño del tablero", 3);
+        let nuevoTamano = prompt("Tamaño del tablero", tamTablero);
+        let tamParsed = parseInt(nuevoTamano);
 
-        if (nuevoTamano !== null && /^[0-9]+$/.test(nuevoTamano)) { //Solo números ( / -> Delimitadores de la expresión regular.||^ : Inicio de la cadena ||[0-9] : Cualquier dígito del 0 al 9 || $ : Final de la cadena. Asegura que no haya nada después del dígito.)
-            tamTablero = parseInt(nuevoTamano);
-            partida();
+        if (nuevoTamano !== null && /^[0-9]+$/.test(nuevoTamano)) { 
+            if (tamParsed > 1 && tamParsed <10) { //Si pones un tamaño muy grande explota
+                // Guardamos el tamaño con la clave "tamTablero" entre comillas
+                sessionStorage.setItem("tamTablero", tamParsed); 
+                // Reiniciamos la página de forma limpia
+                location.reload();
+            }
         }
     }
 });
-    //Modo oscuro 
-    import {modoClaro} from './CodigoDuplicado.js';
-    modoClaro(); 
-
 /////////////////////////////////////////////////////
 //Reacciones de los personajes
     //Volver al idle
@@ -295,7 +310,7 @@ function perderDados(jugadorAfectado){ //Recibe quien pierde los dados
     let cordero = document.getElementById("PersonajeA");
     let cabra = document.getElementById("PersonajeB");
     
-    if(jugadorAfectado === false){ // Le quitamos dados al jugadorA
+    if(jugadorAfectado === 0){ // Le quitamos dados al jugadorA
         cordero.src = "../Knucklebones/Assets/img/cordero_enfadado.gif";
         cabra.src = "../Knucklebones/Assets/img/cabra_feliz.gif";
     }
@@ -314,20 +329,17 @@ const reiniciar = document.getElementById("reiniciarPagina");
     });
 /////////////////////////////////////////////////////
 //Sfx
-    //Música backgorund
-import { inicializar } from './CodigoDuplicado.js';//Exportamos de codigoduplicado.js para usar las funciones
-const musicButton = document.getElementById("BotonMusica");
-inicializar("../Knucklebones/Assets/sfx/juego.mp3", musicButton);
     //Sonido Dado
 function sonidoDado(){
     const sonidoDado = new Audio("../Knucklebones/Assets/sfx/dado.mp3");
     sonidoDado.play();
 }
-//MAIN
-function main() {
-    partida();
-}
-window.onload = main; // Llamar a main cuando la página cargue
+/////////////////////////////////////////////////////
+//Inicialización de las funciones de código duplicado
+    //importar de CódigoDuplicado
+import { arrancarPagina } from './CodigoDuplicado.js';
+    //Música fondo + modo claro + partida
+arrancarPagina("../Knucklebones/Assets/sfx/juego.mp3", partida);
 
 /*
 Generar columna está basado en cómo estaba creado antes en el html  (lo dejo para verlo mejor)

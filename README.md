@@ -116,6 +116,8 @@ https://developer.mozilla.org/es/docs/Web/API/Window/setTimeout
 https://www.luisllamas.es/en/insert-and-remove-elements-from-the-dom-javascript/
 https://developer.mozilla.org/es/docs/Web/API/Element/classList
 https://es.javascript.info/alert-prompt-confirm
+https://developer.mozilla.org/es/docs/Web/API/Window/sessionStorage
+
 
 ### Assets:
 Algunos creados/editados por mi:
