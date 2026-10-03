@@ -22,26 +22,8 @@ noscript{
   outline-color: rebeccapurple;
 }
 /*Boton Música*/
-#BotonMusica{
-  background-repeat: no-repeat;
-	background-size: cover;
-  background-position: center; 
-  background-color: transparent;
-  border-color: #2C2C2C;  
-
-  width: 6vw;
-  height: 10vh;
-
-  position: fixed; 
-  bottom: 5vh;
-  right: 1vh; 
-  z-index: 2; 
-}
 .botonMusicaFondo{
   background-image: url(../Assets/img/MusicNo.png);
-}
-#BotonMusica:hover{
-  transform:scale(1.03);
 }
 
 body{
@@ -207,7 +189,7 @@ button{
   justify-content: center;
   gap: 10px;
 }
-#cajaTituloTutorial{
+.cajaTituloTutorial{
   display: flex;          
   flex-direction: row;    
   align-items: center;    /* Centra verticalmente los elementos */
@@ -215,17 +197,17 @@ button{
   gap: 10px;
   margin-top: -5vh;
 }
-#tituloTextoTutorial{
+.tituloTextoTutorial{
   color: #f2e9cd;
   font-size: 2em;
   margin-bottom: -2.8vh;
 }
-#Tutorial_Bracket {
+.Tutorial_Bracket {
   margin: -1vw;
   margin-top: 5vh; 
   transform: scale(0.5); 
 }
-#textoTutorial{
+.textoTutorial{
   font-size: 1.4em;
   line-height: 1.4;
 }

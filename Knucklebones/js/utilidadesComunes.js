@@ -1,6 +1,6 @@
 //MÚSICA
 let musicaFondo = null; //Le paso que música quiero desde los otros java scripts porque cambia
-let musicOn = true;
+let reproduciendoMusica = true;
 let fondoBotonMusica = null; //Le pasaré el id del botonMusica 
 
 // Para poder exportarlas a los otros js
@@ -11,15 +11,15 @@ function cargarMusica(ruta) {
 //Controla la música global
 function controlMusica(botonId) {
     fondoBotonMusica = document.getElementById(botonId);
-   if(musicOn){
+   if(reproduciendoMusica){
         musicaFondo.play();
-        musicOn=false;
+        reproduciendoMusica=false;
         fondoBotonMusica.classList.add("botonMusica-on");
         fondoBotonMusica.classList.remove("botonMusica-off");
     }
     else{
          musicaFondo.pause();
-         musicOn=true;
+         reproduciendoMusica=true;
         fondoBotonMusica.classList.remove("botonMusica-on");
         fondoBotonMusica.classList.add("botonMusica-off");
     }
@@ -35,7 +35,7 @@ function inicializar(ruta, botonId){ //Y ahora esta función es para montar todo
 //MODO OSCURO
 function modoClaro (){
     document.addEventListener("keydown", (event) => {
-        if (event.key === "l") {
+        if (event.key.toLowerCase() === "l") {//Acepta mayúsculas y minúsuclas
             document.body.classList.toggle("light");
         }
     });

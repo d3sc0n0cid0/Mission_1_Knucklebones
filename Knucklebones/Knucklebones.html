@@ -7,18 +7,18 @@
     <!--Union con el javaScript-->
     <!--defer: Para que se descargue en segundo plano el js y se ejecute tras se cargue el html-->
     <!--module porque estamos exportando e importando funciones-->
-    <script defer type="module" src="../Knucklebones/js/Knucklebones.js"></script>
-    <script defer type="module" src="../Knucklebones/js/CodigoDuplicado.js"></script>
+    <script defer type="module" src="js/Knucklebones.js"></script>
+    <script defer type="module" src="js/utilidadesComunes.js"></script>
     <!--Union con el css--> 
-    <link href="../Knucklebones/css/KnucklebonesInicio.css" rel="stylesheet" type="text/css">
-    <link href="../Knucklebones/css/CodigoDuplicado.css" rel="stylesheet" type="text/css">
+    <link href="css/KnucklebonesInicio.css" rel="stylesheet" type="text/css">
+    <link href="css/utilidadesComunes.css" rel="stylesheet" type="text/css">
 
     <!--Vínculo de las fuentes de GoogleFonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,100..900;1,8..30,100..900&display=swap" rel="stylesheet">
 
-    <link rel="shortcut icon" href="../Knucklebones/Assets/img/Site-favicon.png" >
+    <link rel="shortcut icon" href="Assets/img/Site-favicon.png" >
     <title>Knucklebones</title>
 </head>
 <body>
@@ -52,40 +52,43 @@
                 <div id="tutorial" class="css_Tutorial oculto">
                     <div id="CajaTutorial">
                         <div id="cajaTituloTutorial_inicial">
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
-                            <p id="tituloTextoTutorial">OBJETIVO</p>
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p class="tituloTextoTutorial">OBJETIVO</p>
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
                         </div>
-                        <p id="textoTutorial">Consigue más puntos que tu oponente colocando dados en tres columnas.</p>
-                         <div id="cajaTituloTutorial">
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
-                            <p id="tituloTextoTutorial">PREPARACIÓN</p>
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                        <p class="textoTutorial">Consigue más puntos que tu oponente colocando dados en tres columnas.</p>
+                         <div class="cajaTituloTutorial">
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p class="tituloTextoTutorial">PREPARACIÓN</p>
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
                         </div>
-                        <p id="textoTutorial">Cada jugador tiene nueve dados de seis caras. Hay un tablero compartido con 3 columnas.</p>
-                        <div id="cajaTituloTutorial">
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
-                            <p id="tituloTextoTutorial">GAMEPLAY</p>
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                        <p class="textoTutorial">Cada jugador tiene nueve dados de seis caras. Hay un tablero compartido con 3 columnas.</p>
+                        <div class="cajaTituloTutorial">
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p class="tituloTextoTutorial">GAMEPLAY</p>
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
                         </div>
-                        <ol type="1" id="textoTutorial">
+                        <ol type="1" class="textoTutorial">
                             <li>Los jugadores se turnan para lanzar un dado.</li>
                             <li>Coloca el dado lanzado en cualquiera de tus tres columnas.</li>
                             <li>Cada columna puede contener un máximo de tres dados.</li>
                         </ol>
-                        <div id="cajaTituloTutorial">
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
-                            <p id="tituloTextoTutorial">REGLAS</p>
-                            <img id="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
+                        <div class="cajaTituloTutorial">
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Right.png" alt="Title_Bracket_Right"/>
+                            <p class="tituloTextoTutorial">REGLAS</p>
+                            <img class="Tutorial_Bracket" src="Assets/img/Title_Bracket_Left.png" alt="Title_Bracket_Left"/>
                         </div>
-                        <p id="textoTutorial"><b>Retirar los dados del oponente:</b> Cuando colocas un dado, retiras todos los <br>
+                        <p class="textoTutorial"><b>Retirar los dados del oponente:</b> Cuando colocas un dado, retiras todos los <br>
                             dados de tu oponente del mismo valor en la misma columna. </p>
-                        <p id="textoTutorial"><b>Multiplicadores de puntuación:</b> Los dados del mismo valor dentro de una sola <br>
-                            columna multiplican su puntuación.<br>
-                                 Dos dados iguales: Cada dado vale el doble de su valor nominal <br> (por ejemplo, dos 5 valen 20 puntos en total).<br>
-                                 Tres dados iguales: Cada dado vale el triple de su valor nominal <br> (por ejemplo, tres 5 valen 45 puntos en total).</p>
-                        <p id="textoTutorial">El juego termina inmediatamente cuando un jugador llena sus nueve espacios. <br> El otro jugador no tiene un turno final.</p>
-                        <p id="textoTutorial">Los jugadores suman el valor de todos sus dados, aplicando cualquier multiplicador. <br> El jugador con la puntuación total más alta gana</p>
+                        <p class="textoTutorial"><b>Multiplicadores de puntuación:</b> Los dados del mismo valor dentro de una sola <br>
+                            columna elevan su puntuación.<br>
+                                 Dos dados iguales: Cada dado vale el valor elevado al cuadradi de su valor nominal <br> (por ejemplo, dos 5 valen 25 puntos en total).<br> <!--Esto ya lo ahce diferente al knuclebones original es una versión un poco más extrema y dificil-->
+                                 Tres dados iguales: Cada dado vale el valor elevado al cubo de su valor nominal <br> (por ejemplo, tres 5 valen 125 puntos en total).<br>
+                                 Todo esto con la excepción del 1, el cual su valor solo será multiplicado<br>
+                                 Es una versión algo más complicada que la versión original, para tener que pensar más como jugar<br>
+                                 Porque será más dificil ganar</p>
+                        <p class="textoTutorial">El juego termina inmediatamente cuando un jugador llena sus nueve espacios. <br> El otro jugador no tiene un turno final.</p>
+                        <p class="textoTutorial">Los jugadores suman el valor de todos sus dados, aplicando cualquier multiplicador. <br> El jugador con la puntuación total más alta gana</p>
                     </div>
                 </div>
             <li><button id="botonSalir" class="botonDecorado">Salir</button></li>

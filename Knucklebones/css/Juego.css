@@ -19,26 +19,9 @@ html {
 }
 
 /*Música*/
-#BotonMusica{
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center; 
-    background-color: transparent;
-    border-color: #2C2C2C;  
 
-    width: 6vw;
-    height: 10vh;
-
-    position: fixed; 
-    bottom: 5vh;
-    right: 1vh; 
-    z-index: 2; 
-}
 .botonMusicaFondo{
   background-image: url(../Assets/img/MusicNo.png);
-}
-#BotonMusica:hover{
-  transform:scale(1.03);
 }
 
 /*Seleccionador de filas y columnas*/
@@ -48,7 +31,7 @@ html {
     gap: 3vw;
 
     color: #f2e9cd;
-    font-size: 1,02em;
+    font-size: 1.02em;
 }
 #generar{
     margin-top: 2vh;
@@ -62,21 +45,6 @@ button{
   height: 5vh;
   margin-bottom: -2.5%;
 }
-#botonDecorado{
-    background-image: url("../Assets/img/Header_BG_Black.png");
-    background-color: transparent;
-    background-size:contain;      
-    border:none;  
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #a9a494;
-    font-weight: bold;
-}
-#botonDecorado:hover{
-    color: yellow;
-    background-image: url("../Assets/img/Header_BG_Red.png");
-}
-
 /*Tableros*/
 #ContenedorGeneral{
     display: grid;

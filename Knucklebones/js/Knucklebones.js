@@ -1,6 +1,10 @@
+//Inicialización de las funciones de código duplicado
+    //importar de CódigoDuplicado
+import { arrancarPagina } from './utilidadesComunes.js';//Exportamos de utilidades comunes.js para usar las funciones
+
 //Lógica de las imágenes que cambian oro/calavera
 const imagen = document.getElementById("imagenCambiante");
-const imagenesPosibles = ["../Knucklebones/Assets/img/oro.png", "../Knucklebones/Assets/img/muerte.png"];
+const imagenesPosibles = ["Assets/img/oro.png", "Assets/img/muerte.png"];
 let indice = 0;
 let intervaloCambio; // Variable para almacenar el intervalo
     // Generar número aleatorio
@@ -24,7 +28,7 @@ for(let logo of logohover){//Para cada logo
     let originalLogo = imagen.src;//Guardamos la imagen orignal
     logo.addEventListener("mouseenter", () => {//Mouse sobre el logo
         let logoalt = imagen.alt;
-        imagen.src= `../Knucklebones/Assets/img/${logoalt}_hover.png`; //Cambiamos la imagen por la alterada
+        imagen.src= `Assets/img/${logoalt}_hover.png`; //Cambiamos la imagen por la alterada
     });
     logo.addEventListener("mouseleave", () => {//Mouse sale del logo
         imagen.src= originalLogo; //La imagen vuelve a la original
@@ -49,32 +53,28 @@ botonTutorial.addEventListener("click", () => {
 });
     //Ir al juego
 const comenzarJuego = document.getElementById("botonComenzarJuego");
-comenzarJuego.addEventListener("click",()=>{
+comenzarJuego.addEventListener("click", () => {
     pulsarBoton();
-	 window.location.href = "../Knucklebones/Juego.html";//Abre la pestaña sobre si misma a la de juego
+    window.location.href = "Juego.html"; // Directo al HTML de la raíz
 });
 ///////////////////////////////////////////////////////////////////////////////////
     //Pulsar botón Sonido
 function pulsarBoton() {	
-    let tocarBoton = new Audio("../Knucklebones/Assets/sfx/pulsarBoton.mp3");
+    let tocarBoton = new Audio("Assets/sfx/pulsarBoton.mp3");
 	tocarBoton.play();
 }
     //Hover botón sonido
 const botonHover = document.getElementsByClassName("botonDecorado");
 for(let boton of botonHover){//A todos los botones
-    let acariciarBoton = new Audio("../Knucklebones/Assets/sfx/hoverBoton.mp3");
+    let acariciarBoton = new Audio("Assets/sfx/hoverBoton.mp3");
     boton.addEventListener("mouseenter", () => {
         acariciarBoton.play();
     });
 }
 ///////////////////////////////////////////////////////////////////////////////////
-//Inicialización de las funciones de código duplicado
-    //importar de CódigoDuplicado
-import { arrancarPagina } from './CodigoDuplicado.js';//Exportamos de CodigoDuplicado.js para usar las funciones
-
 function main() {
     let tiempo = generarTiempoRandom();
     setTimeout(cambioImagen, tiempo);
 }
 //Música fondo + modo claro + main
-arrancarPagina("../Knucklebones/Assets/sfx/inicio.mp3", main); setTimeout(cambioImagen, tiempo);
+arrancarPagina("Assets/sfx/inicio.mp3", main);

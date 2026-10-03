@@ -1,13 +1,29 @@
+//importar de CódigoDuplicado
+import { arrancarPagina } from './utilidadesComunes.js';
 //Variables de la tabla
     //Tablero
     let tamTablero = parseInt(sessionStorage.getItem("tamTablero")) || 3; // Si hay un valor guardado en sessionStorage usamos ese, si no, 3 por defecto
     let jugador; 
     let rival;
-    let puntuacionA=0;
-    let puntuacionB=0;
+    let puntuacionA = 0;//Valores digitales, más abajo elPuntuaciónA/B es para la parte visual
+    let puntuacionB = 0;
     // Caché de elementos HTML para no hacer querySelectorAll en cada jugada
     let cacheMatrizA = [];
     let cacheMatrizB = [];
+    // Caché de elementos estáticos del DOM
+    let Dado, turno, elPuntuacionA, elPuntuacionB, jugadorGanador, contenedorGanador;
+    let PersonajeA, PersonajeB;
+
+function inicializarCacheDOM() {
+    Dado = document.getElementById("Dado");
+    turno = document.getElementById("selectorTurno");
+    elPuntuacionA = document.getElementById("puntuacionA");
+    elPuntuacionB = document.getElementById("puntuacionB");
+    jugadorGanador = document.getElementById("selectorGanador");
+    contenedorGanador = document.getElementById("contenedorGanador");
+    PersonajeA = document.getElementById("PersonajeA");
+    PersonajeB = document.getElementById("PersonajeB");
+}
 ///////////////////////////////////////////////////////////////////////////////////
 //Generación de tablero dinámico
 function generarTableroDOM(tablero) {
@@ -58,26 +74,27 @@ function actualizarGridDesdeMatriz(tablero, esJugador) {
 }
     //Sustituir dado en grid
 function sustituirDado(numDado){
-    document.getElementById("Dado").textContent = numDado;
+    Dado.textContent = numDado;
 }
     //Selector de turno, muestra a quien le toca colocar
 function turnoDe(){
-    const turno = document.getElementById("selectorTurno");
     if(jugador===0){turno.textContent = "Turno de jugador A";}
     else{turno.textContent = "Turno de jugador B";}
 }
     //Mostrar puntuación, muestra la puntuación de cada jugador
 function mostrarPuntuacion(num, esJugador){
-    let puntuacion;
-    if (esJugador === 0) { puntuacion = document.getElementById("puntuacionA"); puntuacionA=num;} 
-    else { puntuacion = document.getElementById("puntuacionB");puntuacionB=num;}
-    puntuacion.textContent = `Puntuación: ${num}`; 
+    if (esJugador === 0) { 
+        puntuacionA = num; 
+        elPuntuacionA.textContent = `Puntuación: ${num}`;
+    } 
+    else { 
+        puntuacionB = num; 
+        elPuntuacionB.textContent = `Puntuación: ${num}`;
+    }
 }
     //Mostrar ganador muestra quien gana una vez seacaba la partida
 function ganador(){
-    const jugadorGanador = document.getElementById("selectorGanador");
-    const contenedor = document.getElementById("contenedorGanador");
-    contenedor.classList.remove("oculto");
+    contenedorGanador.classList.remove("oculto");
     if(puntuacionA<puntuacionB){
         jugadorGanador.textContent = "Ha ganado el jugador B";
     }
@@ -103,7 +120,7 @@ function crearTablero(tablero, esJugador){
 }
     //Genera el número aleatorio del dado (1-6)
 function generarTirada() {
-    const numDado = Math.round(Math.random()*(6 - 1)+1);
+    const numDado = Math.floor(Math.random() * 6) + 1; // Math.floor con * 6 + 1 da números equiprobables del 1 al 6
     sustituirDado(numDado);
     sonidoDado();
     return numDado;
@@ -137,7 +154,7 @@ function selecColumna() {
     });
 }
     //Colocar el número del dado en la columna seleccionada
-function insertarDadoColumna(dado, columna, tablero, esJugador){
+function insertarDadoColumna(dado, columna, tablero){
     for(let j=tamTablero-1;j>=0;j--){
         if(tablero[j][columna]===0){
             tablero[j][columna]=dado;
@@ -166,14 +183,14 @@ function comprobarTableros(dado, columna, tablero, esJugadorRival){
     //Bajar los número si queda un 0 de por medio
 function bajarNum(pos, columna, tablero){
      if (pos === 0) {
-        let num = tablero[pos][columna];
+        const num = tablero[pos][columna];
         tablero[pos][columna] = 0;
         return num;
     }
     if (tablero[pos][columna] === 0) {// Si es 0, bajamos el de arriba
         return bajarNum(pos - 1, columna, tablero);
     } else { // Si no da 0 devolvemos el valor actual
-        let valor = tablero[pos][columna];
+        const valor = tablero[pos][columna];
         tablero[pos][columna] = 0;
         return valor;
     }
@@ -221,7 +238,7 @@ function condicionFinPartida(tablero){
     return true;
 }
     //Cambio de jugador
-function CambioJugador(){
+function cambioJugador(){
     jugador = 1 - jugador;
     rival = 1 - jugador;
 }
@@ -229,6 +246,8 @@ function CambioJugador(){
 //Partida
 async function partida(){ //Asyc para que funcione el await
     //Inicialización de variables
+    inicializarCacheDOM();
+
     generarTableroDOM("TableroA");
     generarTableroDOM("TableroB");
 
@@ -251,7 +270,7 @@ async function partida(){ //Asyc para que funcione el await
     //Inicio de partida
     while(!partidaAcabada){//Hasta que no se llene uno de los tableros no acaba la partida
         //Cambio de turno al otro jugador
-        CambioJugador();
+        cambioJugador();
         turnoDe(); //Cambia el texto de a quien le toca
 
         //El jugador coloca el dado que le ha tocado
@@ -260,7 +279,7 @@ async function partida(){ //Asyc para que funcione el await
             //Colocar Dado
         do{
             columna = await selecColumna();
-            insertadoConExito = insertarDadoColumna(dado, columna, tableros[jugador], jugador) //Me daba error si no cambiaba a un number
+            insertadoConExito = insertarDadoColumna(dado, columna, tableros[jugador]) //Me daba error si no cambiaba a un number
         }while(insertadoConExito===false);//Hasta que no o colo que en una columna con hueco no acaba
         
         //Comprobación con el tablero del contrario
@@ -275,7 +294,7 @@ async function partida(){ //Asyc para que funcione el await
             actualizarGridDesdeMatriz(tableros[rival], rival);
             
         //Comprobamos si se ha acabado la partida, si acaba saltar a mensaje de victoria 
-        partidaAcabada = condicionFinPartida(tableros[jugador]);       
+        partidaAcabada = condicionFinPartida(tableroA) || condicionFinPartida(tableroB); //Aunque tecnicamente solo ahce falta comprobar el acutal el webi arena me salta error si no lo pongo así   
     }
 }
 //////////////////////////////////////////////////////////////////////////////////
@@ -283,15 +302,20 @@ async function partida(){ //Asyc para que funcione el await
     //Añadir celdas
 document.addEventListener("keydown", (event) => {
     if (event.key === "+") {
-        let nuevoTamano = prompt("Tamaño del tablero", tamTablero);
+        let nuevoTamano = prompt("Tamaño del tablero (2-9)", tamTablero);
         let tamParsed = parseInt(nuevoTamano);
 
         if (nuevoTamano !== null && /^[0-9]+$/.test(nuevoTamano)) { 
-            if (tamParsed > 1 && tamParsed <10) { //Si pones un tamaño muy grande explota
+            if (tamParsed > 1 && tamParsed <10) { //Si pones un tamaño muy grande explota un poco
+                if (confirm(`¿Quieres reiniciar la partida con un tablero de ${tamParsed}x${tamParsed}?`)) {
                 // Guardamos el tamaño con la clave "tamTablero" entre comillas
-                sessionStorage.setItem("tamTablero", tamParsed); 
-                // Reiniciamos la página de forma limpia
-                location.reload();
+                    sessionStorage.setItem("tamTablero", tamParsed); 
+                    // Reiniciamos la página de forma limpia
+                    location.reload();
+                }
+                else {
+                alert("Por favor, introduce un tamaño válido entre 2 y 9.");
+                }
             }
         }
     }
@@ -300,25 +324,19 @@ document.addEventListener("keydown", (event) => {
 //Reacciones de los personajes
     //Volver al idle
 function volverIdle(){
-    let cordero = document.getElementById("PersonajeA");
-    let cabra = document.getElementById("PersonajeB");
-    cordero.src = "../Knucklebones/Assets/img/cordero_idle.gif";
-    cabra.src = "../Knucklebones/Assets/img/cabra_idle.gif";
+    PersonajeA.src = "Assets/img/cordero_idle.gif";
+    PersonajeB.src = "Assets/img/cabra_idle.gif";
 }
     //Perder dados
-function perderDados(jugadorAfectado){ //Recibe quien pierde los dados
-    let cordero = document.getElementById("PersonajeA");
-    let cabra = document.getElementById("PersonajeB");
-    
-    if(jugadorAfectado === 0){ // Le quitamos dados al jugadorA
-        cordero.src = "../Knucklebones/Assets/img/cordero_enfadado.gif";
-        cabra.src = "../Knucklebones/Assets/img/cabra_feliz.gif";
+function perderDados(jugadorAfectado){ 
+    if (jugadorAfectado === 0) { 
+        PersonajeA.src = "Assets/img/cordero_enfadado.gif";
+        PersonajeB.src = "Assets/img/cabra_feliz.gif";
+    } else { 
+        PersonajeB.src = "Assets/img/cabra_enfadado.gif";
+        PersonajeA.src = "Assets/img/cordero_feliz.gif";
     }
-    else{ // Le quitamos dados al jugadorB
-        cabra.src = "../Knucklebones/Assets/img/cabra_enfadado.gif";
-        cordero.src = "../Knucklebones/Assets/img/cordero_feliz.gif";
-    }
-    setTimeout(() => { volverIdle(); }, 2400);//Espera el tiempo puesto y vuelve a idle
+    setTimeout(() => { volverIdle(); }, 2400);
 }
 ///////////////////////////////////////////////////////////////////////////////////
 //Reinicio de la partida
@@ -331,15 +349,13 @@ const reiniciar = document.getElementById("reiniciarPagina");
 //Sfx
     //Sonido Dado
 function sonidoDado(){
-    const sonidoDado = new Audio("../Knucklebones/Assets/sfx/dado.mp3");
+    const sonidoDado = new Audio("Assets/sfx/dado.mp3");
     sonidoDado.play();
 }
 /////////////////////////////////////////////////////
 //Inicialización de las funciones de código duplicado
-    //importar de CódigoDuplicado
-import { arrancarPagina } from './CodigoDuplicado.js';
     //Música fondo + modo claro + partida
-arrancarPagina("../Knucklebones/Assets/sfx/juego.mp3", partida);
+arrancarPagina("Assets/sfx/juego.mp3", partida);
 
 /*
 Generar columna está basado en cómo estaba creado antes en el html  (lo dejo para verlo mejor)
