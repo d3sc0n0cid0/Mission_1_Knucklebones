@@ -25,7 +25,7 @@ la tecla "+" una vez comienza la partida.
 correspondiente. A su vez si colocas un dado en una columna donde el contarrio tenga colocado un dado eliminarás todas las instancias del ese dado en el tablero contrario.
 - Al finalizar cada turno se calcula el número de puntos de cada jugador y finalmente
 gana el que obtenga una puntuación mayor.
-- Pulsando la tecla `L` se activa o desactiva el modo oscuro.
+- Pulsando la tecla `L/l` se activa o desactiva el modo claro.
 
 
 ## Uso de IA
